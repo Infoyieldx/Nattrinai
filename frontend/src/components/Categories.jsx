@@ -1,11 +1,11 @@
-import { useLocation } from 'wouter';
-import { categories } from '../data/products';
+import { useNavigate } from "react-router-dom";
+import { categories } from "../data/products";
 
 const Categories = () => {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
 
   const handleCategoryClick = (categoryName) => {
-    setLocation(`/category/${categoryName}`);
+    navigate(`/category/${categoryName}`);
   };
 
   return (

@@ -1,32 +1,35 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'wouter';
+import { useLocation } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import { getAllProducts } from '../data/products';
 
 const Products = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
-  const [location] = useLocation();
+  const location = useLocation(); // from react-router-dom
   const [sortBy, setSortBy] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   // Extract search query from URL
-  const urlParams = new URLSearchParams(window.location.search);
+  const urlParams = new URLSearchParams(location.search);
   const searchQuery = urlParams.get('search') || '';
 
   useEffect(() => {
     const allProducts = getAllProducts();
-    
+
     let products = allProducts;
+
+    // Filter by search
     if (searchQuery) {
-      products = allProducts.filter(product =>
+      products = products.filter(product =>
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.description.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
+    // Sort logic
     if (sortBy === 'price-low') {
-      products = products.sort((a, b) => a.price - b.price);
+      products = [...products].sort((a, b) => a.price - b.price);
     } else if (sortBy === 'price-high') {
-      products = products.sort((a, b) => b.price - a.price);
+      products = [...products].sort((a, b) => b.price - a.price);
     }
 
     setFilteredProducts(products);
@@ -57,7 +60,7 @@ const Products = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
           </div>
         </div>
       </div>
-      
+
       {filteredProducts.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-gray-500 text-lg">No products found</p>

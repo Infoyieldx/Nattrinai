@@ -1,17 +1,15 @@
+import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { useRoute, useLocation } from 'wouter';
-import { getAllProducts, getProductById } from '../data/products';
+import { getProductById } from '../data/products';
 
 const ProductDetail = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
-  const [match, params] = useRoute('/product/:productId');
-  const [, setLocation] = useLocation();
+  const { productId } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
 
-  const productId = parseInt(params?.productId);
-
   useEffect(() => {
-    const foundProduct = getProductById(productId);
+    const foundProduct = getProductById(parseInt(productId));
     setProduct(foundProduct);
   }, [productId]);
 
@@ -34,7 +32,7 @@ const ProductDetail = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
 
   const handleBuyNow = () => {
     handleAddToCartWithQuantity();
-    setLocation('/checkout');
+    navigate('/checkout');
   };
 
   const isInWishlist = wishlistItems.some(item => item.id === product.id);

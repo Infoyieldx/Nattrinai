@@ -1,23 +1,21 @@
 import { useState, useEffect } from 'react';
-import { useRoute } from 'wouter';
+import { useParams, useLocation } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import { subcategories } from '../data/products';
 
 const Category = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
-  const [match, params] = useRoute('/category/:categoryName');
+  const { categoryName } = useParams();
+  const location = useLocation();
+
   const [selectedSubcategory, setSelectedSubcategory] = useState('');
   const [sortBy, setSortBy] = useState('');
   const [products, setProducts] = useState([]);
 
-  const categoryName = params?.categoryName;
-  const urlParams = new URLSearchParams(window.location.search);
-  const subFromUrl = urlParams.get('sub') || '';
-
   useEffect(() => {
-    if (subFromUrl) {
-      setSelectedSubcategory(subFromUrl);
-    }
-  }, [subFromUrl]);
+    const urlParams = new URLSearchParams(location.search);
+    const subFromUrl = urlParams.get('sub') || '';
+    setSelectedSubcategory(subFromUrl);
+  }, [location.search]);
 
   useEffect(() => {
     if (!categoryName || !subcategories[categoryName]) {
@@ -34,9 +32,9 @@ const Category = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
     }
 
     if (sortBy === 'price-low') {
-      categoryProducts = categoryProducts.sort((a, b) => a.price - b.price);
+      categoryProducts = [...categoryProducts].sort((a, b) => a.price - b.price);
     } else if (sortBy === 'price-high') {
-      categoryProducts = categoryProducts.sort((a, b) => b.price - a.price);
+      categoryProducts = [...categoryProducts].sort((a, b) => b.price - a.price);
     }
 
     setProducts(categoryProducts);
@@ -57,7 +55,7 @@ const Category = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
     <div className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-[#3D3F24] mb-6">{categoryName} Products</h1>
-        
+
         {/* Filter and Sort Options */}
         <div className="flex flex-col sm:flex-row gap-4 mb-6">
           <select
