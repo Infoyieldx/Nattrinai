@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useRoute, useLocation } from 'wouter';
 import { getAllProducts, getProductById } from '../data/products';
 
+
+
 const ProductDetail = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
   const [match, params] = useRoute('/product/:productId');
   const [, setLocation] = useLocation();

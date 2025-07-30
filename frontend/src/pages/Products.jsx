@@ -7,6 +7,9 @@ const Products = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
   const [location] = useLocation();
   const [sortBy, setSortBy] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
+  
+
+  
 
   // Extract search query from URL
   const urlParams = new URLSearchParams(window.location.search);
@@ -14,7 +17,7 @@ const Products = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
 
   useEffect(() => {
     const allProducts = getAllProducts();
-    
+
     let products = allProducts;
     if (searchQuery) {
       products = allProducts.filter(product =>
@@ -23,10 +26,11 @@ const Products = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
       );
     }
 
+    // Create a new array before sorting to avoid mutating state/shared data
     if (sortBy === 'price-low') {
-      products = products.sort((a, b) => a.price - b.price);
+      products = [...products].sort((a, b) => a.price - b.price);
     } else if (sortBy === 'price-high') {
-      products = products.sort((a, b) => b.price - a.price);
+      products = [...products].sort((a, b) => b.price - a.price);
     }
 
     setFilteredProducts(products);
@@ -52,6 +56,7 @@ const Products = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
                 <option value="price-low">Price: Low to High</option>
                 <option value="price-high">Price: High to Low</option>
               </select>
+
               <i className="fas fa-chevron-down absolute right-2 top-1/2 transform -translate-y-1/2 text-[#A6A37E] pointer-events-none"></i>
             </div>
           </div>
@@ -83,4 +88,6 @@ const Products = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
   );
 };
 
+
 export default Products;
+
