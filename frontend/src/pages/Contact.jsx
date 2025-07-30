@@ -52,16 +52,14 @@ const Contact = () => {
             </div>
             <div className="flex items-start space-x-4">
               <div className="bg-[#4A5A2A] rounded-full p-3">
-                <i className="fas fa-clock text-white text-xl"></i>
+                <i className="fas fa-location text-white text-xl"></i>
               </div>
-              <div>
-                <h3 className="font-semibold text-[#3D3F24] mb-2">Delivery Hours</h3>
-                <p className="text-gray-600">
-                  Mon-Sat: 8:00 AM - 10:00 PM<br />
-                  Sunday: 9:00 AM - 9:00 PM<br />
-                  Same-day delivery available
-                </p>
-              </div>
+              <div><iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1dXXXXXXX..."
+                    
+                   
+                  ></iframe></div>
+              
             </div>
           </div>
         </div>
@@ -129,28 +127,9 @@ const Contact = () => {
         </div>
       </div>
       
-      <div className="mt-16">
-        <h2 className="text-2xl font-bold text-[#3D3F24] text-center mb-8">Frequently Asked Questions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold text-[#3D3F24] mb-3">Do you offer organic certification?</h3>
-            <p className="text-gray-600">Yes, all our products are certified organic by recognized certification bodies. We provide certification details for each product.</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold text-[#3D3F24] mb-3">What are your delivery charges?</h3>
-            <p className="text-gray-600">We offer free delivery for orders above ₹500. For orders below ₹500, a nominal delivery charge of ₹50 applies.</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold text-[#3D3F24] mb-3">Can I return products if not satisfied?</h3>
-            <p className="text-gray-600">We offer a 7-day return policy for non-perishable items. Fresh produce returns are accepted within 24 hours if there's a quality issue.</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold text-[#3D3F24] mb-3">Do you have bulk order discounts?</h3>
-            <p className="text-gray-600">Yes, we offer attractive discounts for bulk orders. Contact us directly for custom pricing on large quantities.</p>
-          </div>
-        </div>
+      
       </div>
-    </div>
+    
   );
 };
 

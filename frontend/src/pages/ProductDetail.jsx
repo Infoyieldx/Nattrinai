@@ -2,6 +2,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getProductById } from '../data/products';
 
+
+
 const ProductDetail = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
   const { productId } = useParams();
   const navigate = useNavigate();

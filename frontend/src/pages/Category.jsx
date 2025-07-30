@@ -32,9 +32,9 @@ const Category = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
     }
 
     if (sortBy === 'price-low') {
-      categoryProducts = [...categoryProducts].sort((a, b) => a.price - b.price);
+      categoryProducts = [...categoryProducts].sort((a, b) => Number(a.price) - Number(b.price));
     } else if (sortBy === 'price-high') {
-      categoryProducts = [...categoryProducts].sort((a, b) => b.price - a.price);
+      categoryProducts = [...categoryProducts].sort((a, b) => Number(b.price) - Number(a.price));
     }
 
     setProducts(categoryProducts);

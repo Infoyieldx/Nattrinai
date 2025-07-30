@@ -5,10 +5,11 @@ const Footer = () => {
     <footer className="bg-[#3D3F24] text-white py-12">
       <div className="w-full mx-auto sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* About / Brand */}
           <div>
             <div className="text-2xl font-bold mb-4">
               <i className="fas fa-leaf mr-2"></i>
-              Nattrinai organic products
+              Nattrinai Organic Products
             </div>
             <p className="text-gray-300 mb-4">
               Your trusted source for fresh, organic, and healthy products. From farm to table, we ensure quality and sustainability.
@@ -20,7 +21,9 @@ const Footer = () => {
               <i className="fab fa-youtube text-xl cursor-pointer hover:text-[#A6A37E]"></i>
             </div>
           </div>
-          <div>
+
+          {/* Quick Links */}
+          <div className="mx-[20px]">
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li><Link to="/" className="text-gray-300 hover:text-white">Home</Link></li>
@@ -30,7 +33,9 @@ const Footer = () => {
               <li><a href="#" className="text-gray-300 hover:text-white">Blog</a></li>
             </ul>
           </div>
-          <div>
+
+          {/* Categories */}
+          <div className="mx-[20px]">
             <h3 className="text-lg font-semibold mb-4">Categories</h3>
             <ul className="space-y-2">
               <li><Link to="/category/Beauty" className="text-gray-300 hover:text-white">Beauty</Link></li>
@@ -40,17 +45,24 @@ const Footer = () => {
               <li><Link to="/category/Oil" className="text-gray-300 hover:text-white">Oil</Link></li>
             </ul>
           </div>
+
+          {/* Customer Service */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Customer Service</h3>
-            <ul className="space-y-2">
-              <li><Link to="/contact" className="text-gray-300 hover:text-white">Help Center</Link></li>
-              <li><a href="#" className="text-gray-300 hover:text-white">Shipping Info</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white">Returns</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white">Track Order</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white">FAQ</a></li>
-            </ul>
+            <h3 className="text-lg font-semibold mb-4">Reach Us</h3>
+            <p className="text-gray-300 mb-1">
+              Need help fast? Fill out our <Link to="/contact" className="underline hover:text-white">form</Link> or email:
+            </p>
+            <p className="text-gray-300 mb-4">customercare.iyarkaimart@gmail.com</p>
+            <div className="flex space-x-4">
+              <i className="fab fa-facebook text-xl cursor-pointer hover:text-[#A6A37E]"></i>
+              <i className="fab fa-instagram text-xl cursor-pointer hover:text-[#A6A37E]"></i>
+              <i className="fab fa-twitter text-xl cursor-pointer hover:text-[#A6A37E]"></i>
+              <i className="fab fa-youtube text-xl cursor-pointer hover:text-[#A6A37E]"></i>
+            </div>
           </div>
         </div>
+
+        {/* Footer Bottom */}
         <div className="border-t border-gray-600 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">

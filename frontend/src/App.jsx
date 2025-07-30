@@ -19,6 +19,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 import Auth from "./pages/Auth.jsx";
+import DryFruitsCombos from './components/DryFruitsCombos';
 
 function MainRouter() {
   const [cartItems, setCartItems] = useState([]);

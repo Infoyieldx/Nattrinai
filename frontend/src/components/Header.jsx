@@ -109,12 +109,12 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
               }`}
             />
           </div>
-
-          <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium">Home</Link>
-            <Link to="/products" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium">Products</Link>
-            <Link to="/about" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium">About</Link>
-            <Link to="/contact" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium">Contact</Link>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8 ">
+            <Link href="/" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline hover:font-bold hover:text:4xl ">Home</Link>
+            <Link href="/products" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline hover:font-bold hover:text:4xl">Products</Link>
+            <Link href="/about" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline hover:font-bold hover:text:4xl">About</Link>
+            <Link href="/contact" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline hover:font-bold hover:text:4xl">Contact</Link>
           </div>
 
           <div className="hidden md:flex items-center flex-1 max-w-md mx-8" ref={searchRef}>
@@ -126,8 +126,10 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
                   value={searchQuery}
                   onChange={handleSearchInput}
                   onFocus={() => searchQuery.trim() && setShowSuggestions(true)}
-                  className="w-full pl-10 pr-4 py-2 border border-[#A6A37E] rounded-full focus:outline-none focus:ring-2 focus:ring-[#4A5A2A] text-sm"
-                />
+                  className="w-full pl-10 pr-4 py-2 border border-[#A6A37E] rounded-full focus:outline-none focus:ring-2 focus:ring-[#4A5A2A] text-sm
+    hover:border-[#4A5A2A] hover:bg-[#f5f5f0] transition"/>
+    
+
                 <i className="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-[#A6A37E] text-sm"></i>
               </form>
               {showSuggestions && (
@@ -138,10 +140,10 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
               )}
             </div>
           </div>
-
-          <div className="flex items-center space-x-4">
-            <Link to="/wishlist">
-              <div className="relative cursor-pointer">
+          {/* Right Icons */}
+          <div className="flex items-center space-x-7">
+            <Link href="/wishlist">
+              <div className="relative cursor-pointer ">
                 <i className="fas fa-heart text-[#4A5A2A] text-xl"></i>
                 {wishlistCount > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -159,9 +161,8 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
                 </span>
               )}
             </button>
-
-            <Link to="/profile">
-              <div className="cursor-pointer">
+            <Link href="/profile">
+              <div className="cursor-pointer ">
                 <i className="fas fa-user text-[#4A5A2A] text-xl"></i>
               </div>
             </Link>

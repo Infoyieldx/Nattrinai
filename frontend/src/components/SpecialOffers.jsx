@@ -1,7 +1,10 @@
 import ProductCard from './ProductCard';
+import { useLocation } from "wouter";
 import { specialOffers } from '../data/products';
 
 const SpecialOffers = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
+  const [, navigate] = useLocation();
+
   return (
     <section className="py-16 bg-[#4A5A2A]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -9,9 +12,13 @@ const SpecialOffers = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
         <p className="text-center text-white mb-12">Limited time deals on organic products</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {specialOffers.map((product) => (
-            <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            <div
+              key={product.id}
+              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+              onClick={() => navigate(`/product/${product.id}`)}
+            >
               <div className="relative">
-                <div className="aspect-square overflow-hidden cursor-pointer">
+                <div className="aspect-square overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.name}
@@ -22,7 +29,10 @@ const SpecialOffers = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
                   {product.discount}% OFF
                 </div>
                 <button
-                  onClick={() => handleWishlistToggle(product)}
+                  onClick={e => {
+                    e.stopPropagation();
+                    handleWishlistToggle(product);
+                  }}
                   className="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow cursor-pointer"
                 >
                   <i className={`fas fa-heart ${wishlistItems.some(item => item.id === product.id) ? 'text-red-500' : 'text-gray-400'}`}></i>
@@ -36,13 +46,17 @@ const SpecialOffers = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
                 </div>
                 <div className="flex space-x-2">
                   <button
-                    onClick={() => handleAddToCart(product)}
+                    onClick={e => {
+                      e.stopPropagation();
+                      handleAddToCart(product);
+                    }}
                     className="flex-1 bg-[#4A5A2A] text-white py-2 rounded-lg font-semibold hover:bg-[#3D3F24] transition-colors whitespace-nowrap cursor-pointer"
                   >
                     Add to Cart
                   </button>
                   <button
-                    onClick={() => {
+                    onClick={e => {
+                      e.stopPropagation();
                       handleAddToCart(product);
                       // Navigate to checkout would be handled by parent
                     }}
