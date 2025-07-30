@@ -92,7 +92,7 @@ export const subcategories = {
       id: 1, name: 'Traditional Pickles', products: [
         {
           id: 40001,
-          name: 'Mango Thokku',
+          name: 'Mango Thokku', 
           price: 149,
           description: 'Tangy and spicy mango thokku made traditionally.',
           image: 'https://www.google.com/search?tbm=isch&q=Mango+Thokku'
@@ -123,6 +123,7 @@ export const subcategories = {
           price: 149,
           description: 'Exotic black rice with antioxidants.',
           image: 'https://www.google.com/search?tbm=isch&q=Black+Rice'
+          /*image: 'https://www.google.com/search?tbm=isch&q=Black+Rice'*/
         }
       ]
     }
