@@ -1,16 +1,25 @@
-import ProductCard from './ProductCard';
-import { dryFruitsCombos } from '../data/products';
+import { useLocation } from "wouter";
+import ProductCard from "./ProductCard";
+import { dryFruitsCombos } from "../data/products";
 
 const DryFruitsCombos = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
+  const [, navigate] = useLocation();
+
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-center text-[#3D3F24] mb-12">Dry Fruits Combo</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {dryFruitsCombos.map((product) => (
-            <div key={product.id} className="bg-[#EEECE5] rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            <div
+              key={product.id}
+              className="bg-[#EEECE5] rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+            >
               <div className="relative">
-                <div className="aspect-square overflow-hidden cursor-pointer">
+                <div
+                  className="aspect-square overflow-hidden cursor-pointer"
+                  onClick={() => navigate(`/product/${product.id}`)}
+                >
                   <img
                     src={product.image}
                     alt={product.name}
@@ -24,14 +33,29 @@ const DryFruitsCombos = ({ handleAddToCart, handleWishlistToggle, wishlistItems 
                   onClick={() => handleWishlistToggle(product)}
                   className="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow cursor-pointer"
                 >
-                  <i className={`fas fa-heart ${wishlistItems.some(item => item.id === product.id) ? 'text-red-500' : 'text-gray-400'}`}></i>
+                  <i
+                    className={`fas fa-heart ${
+                      wishlistItems.some((item) => item.id === product.id)
+                        ? "text-red-500"
+                        : "text-gray-400"
+                    }`}
+                  ></i>
                 </button>
               </div>
               <div className="p-4">
-                <h3 className="font-semibold text-[#3D3F24] mb-2">{product.name}</h3>
+                <h3
+                  className="font-semibold text-[#3D3F24] mb-2 cursor-pointer hover:underline"
+                  onClick={() => navigate(`/product/${product.id}`)}
+                >
+                  {product.name}
+                </h3>
                 <div className="flex items-center mb-3">
-                  <span className="text-lg font-bold text-[#4A5A2A]">₹{product.price}</span>
-                  <span className="text-sm text-gray-500 line-through ml-2">₹{product.originalPrice}</span>
+                  <span className="text-lg font-bold text-[#4A5A2A]">
+                    ₹{product.price}
+                  </span>
+                  <span className="text-sm text-gray-500 line-through ml-2">
+                    ₹{product.originalPrice}
+                  </span>
                 </div>
                 <button
                   onClick={() => handleAddToCart(product)}

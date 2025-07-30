@@ -17,6 +17,7 @@ import Wishlist from "./pages/Wishlist";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
+import DryFruitsCombos from './components/DryFruitsCombos';
 
 function Router() {
   const [cartItems, setCartItems] = useState([]);
