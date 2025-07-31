@@ -9,9 +9,9 @@ const Categories = () => {
   };
 
   return (
-    <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6  lg:px-8">
       <h2 className="text-3xl font-bold text-center text-[#3D3F24] mb-12">Shop by Category</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+      <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6  gap-6">
         {categories.map((category) => (
           <div
             key={category.id}

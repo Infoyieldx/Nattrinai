@@ -274,7 +274,12 @@ export const dryFruitsCombos = [
   { id: 13001, name: 'Premium Dry Fruits', price: 299, originalPrice: 399, discount: 25, description: 'Premium mix of almonds, cashews, and raisins. Rich in nutrients and perfect for healthy snacking.', image: 'https://readdy.ai/api/search-image?query=premium%20mixed%20dry%20fruits%20almonds%20cashews%20raisins%20in%20wooden%20bowl%20on%20clean%20white%20background%20natural%20lighting%20healthy%20snack%20concept&width=300&height=300&seq=df001&orientation=squarish' },
   { id: 13002, name: 'Exotic Mix Nuts', price: 249, originalPrice: 329, discount: 24, description: 'Exotic blend of pistachios, walnuts, and hazelnuts. Provides essential fatty acids and protein.', image: 'https://readdy.ai/api/search-image?query=exotic%20mixed%20nuts%20pistachios%20walnuts%20hazelnuts%20in%20elegant%20bowl%20on%20clean%20white%20background%20natural%20lighting%20premium%20quality%20concept&width=300&height=300&seq=df002&orientation=squarish' },
   { id: 13003, name: 'Healthy Trail Mix', price: 199, originalPrice: 249, discount: 20, description: 'Perfect blend of nuts, seeds, and dried fruits. Ideal for on-the-go energy and nutrition.', image: 'https://readdy.ai/api/search-image?query=healthy%20trail%20mix%20with%20nuts%20dried%20fruits%20seeds%20in%20rustic%20bowl%20on%20clean%20white%20background%20natural%20lighting%20energy%20snack%20concept&width=300&height=300&seq=df003&orientation=squarish' },
-  { id: 13004, name: 'Organic Dates Mix', price: 179, originalPrice: 229, discount: 22, description: 'Natural sweetness of organic dates mixed with nuts. Rich in fiber and natural sugars.', image: 'https://readdy.ai/api/search-image?query=organic%20dates%20mixed%20with%20nuts%20in%20traditional%20bowl%20on%20clean%20white%20background%20natural%20lighting%20sweet%20healthy%20concept&width=300&height=300&seq=df004&orientation=squarish' }
+  { id: 13004, name: 'Organic Dates Mix', price: 179, originalPrice: 229, discount: 22, description: 'Natural sweetness of organic dates mixed with nuts. Rich in fiber and natural sugars.', image: 'https://readdy.ai/api/search-image?query=organic%20dates%20mixed%20with%20nuts%20in%20traditional%20bowl%20on%20clean%20white%20background%20natural%20lighting%20sweet%20healthy%20concept&width=300&height=300&seq=df004&orientation=squarish' },
+  { id: 13005, name: 'Premium Dry Fruits', price: 299, originalPrice: 399, discount: 25, description: 'Premium mix of almonds, cashews, and raisins. Rich in nutrients and perfect for healthy snacking.', image: 'https://readdy.ai/api/search-image?query=premium%20mixed%20dry%20fruits%20almonds%20cashews%20raisins%20in%20wooden%20bowl%20on%20clean%20white%20background%20natural%20lighting%20healthy%20snack%20concept&width=300&height=300&seq=df001&orientation=squarish' },
+  { id: 13006, name: 'Exotic Mix Nuts', price: 249, originalPrice: 329, discount: 24, description: 'Exotic blend of pistachios, walnuts, and hazelnuts. Provides essential fatty acids and protein.', image: 'https://readdy.ai/api/search-image?query=exotic%20mixed%20nuts%20pistachios%20walnuts%20hazelnuts%20in%20elegant%20bowl%20on%20clean%20white%20background%20natural%20lighting%20premium%20quality%20concept&width=300&height=300&seq=df002&orientation=squarish' },
+  { id: 13007, name: 'Healthy Trail Mix', price: 199, originalPrice: 249, discount: 20, description: 'Perfect blend of nuts, seeds, and dried fruits. Ideal for on-the-go energy and nutrition.', image: 'https://readdy.ai/api/search-image?query=healthy%20trail%20mix%20with%20nuts%20dried%20fruits%20seeds%20in%20rustic%20bowl%20on%20clean%20white%20background%20natural%20lighting%20energy%20snack%20concept&width=300&height=300&seq=df003&orientation=squarish' },
+  { id: 13008, name: 'Organic Dates Mix', price: 179, originalPrice: 229, discount: 22, description: 'Natural sweetness of organic dates mixed with nuts. Rich in fiber and natural sugars.', image: 'https://readdy.ai/api/search-image?query=organic%20dates%20mixed%20with%20nuts%20in%20traditional%20bowl%20on%20clean%20white%20background%20natural%20lighting%20sweet%20healthy%20concept&width=300&height=300&seq=df004&orientation=squarish' }
+
 ];
 
 export const trendingProducts = [
@@ -309,6 +314,25 @@ export const getAllProducts = () => {
 export const getProductsByCategory = (categoryName) => {
   if (!subcategories[categoryName]) return [];
   return subcategories[categoryName].flatMap(sub => sub.products);
+};
+
+// Get category for a product
+export const getProductCategory = (productId) => {
+  // Check in subcategories first
+  for (const [categoryName, subcats] of Object.entries(subcategories)) {
+    for (const subcat of subcats) {
+      if (subcat.products.some(p => p.id === productId)) {
+        return categoryName;
+      }
+    }
+  }
+  
+  // Check in other product arrays
+  if (dryFruitsCombos.some(p => p.id === productId)) return 'Grocery';
+  if (trendingProducts.some(p => p.id === productId)) return 'Grocery';
+  if (specialOffers.some(p => p.id === productId)) return 'Grocery';
+  
+  return null;
 };
 
 // Get product by ID from all products
