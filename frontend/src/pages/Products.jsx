@@ -106,7 +106,7 @@ const Products = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
                 <ProductCard
                   key={product.id}
                   product={product}
-                  onAddToCart={handleAddToCart}
+                  onAddToCart={handleAddToCart} 
                   onWishlistToggle={handleWishlistToggle}
                   isInWishlist={wishlistItems.some(item => item.id === product.id)}
                   showBuyNow={true}
