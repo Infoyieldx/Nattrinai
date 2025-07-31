@@ -8,8 +8,30 @@ import Noodles from '../assets/noodels.jpeg';
 import Pickles from '../assets/pickel.jpeg';
 import Oil from '../assets/botel.png';
 import HealthDrinks from '../assets/helath-drinks.jpeg';
-
-
+import HerbalairFreshener from '../assets/herbal_room_freshener.png';
+import EcoFriendlyroofCleaner from '../assets/eco_friendly_roof_cleaner.png';
+import MultiMilletMalt from '../assets/multi_millet_malt.png';
+import HerbalImmunityDrink from '../assets/herbal_immunity_drink.png';
+import LittleMilletNoodles from '../assets/little_millet_noodles.png';
+import BeetrootNoodles from '../assets/beetroot_noodles.png';
+import MangoThokku from '../assets/mango_thokku.png';
+import LemonPickle from '../assets/lemon_pickle.png';
+import RedRice from '../assets/red_rice.png';
+import BlackRice from '../assets/black_rice.png';
+import GroundnuOil from '../assets/groundnut_oil.png';
+import SesamaOil from '../assets/sesame_oil.png';
+import VegetableSoup from '../assets/vegetable_soup.png';
+import MilletSoup from '../assets/millet_soup.png';
+import WildForestHoney from '../assets/wild_forest_honey.png';
+import HoneyWithAmla from '../assets/honey_with_amla.png';
+import QuinoaPuffs from '../assets/quinoa_puffs.png';
+import GranolaBars from '../assets/granola_bars.png';
+import OrganicMultivitamin from '../assets/organic_multivitamin.png';
+import ImmunityBooster from '../assets/immunity_booster.png';
+import OrganicTomatoes from '../assets/organic_tomatoes.png';
+import OrganicSpinach from '../assets/organic_spinach.png';
+import MoisturizingCream from '../assets/moisturizing_cream.png';
+import HerbalFaceWash from '../assets/herbal_face_wash.png';
 
 export const categories = [
   { id: 1, name: 'Home Living', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrstpSyxesTX5dYk1YTZDohUwlZPRA3nFWRw&s' },
@@ -35,14 +57,14 @@ export const subcategories = {
           name: 'Herbal air Freshener',
           price: 499,
           description: 'Natural herbal air freshener to uplift your home.',
-          image: 'https://www.google.com/search?tbm=isch&q=Herbal+Room+Freshener'
+          image: HerbalairFreshener
         },
         {
           id: 10002,
           name: 'Eco-Friendly roof Cleaner',
           price: 190,
           description: 'Safe, organic floor cleaner for healthy homes.',
-          image: 'https://www.google.com/search?tbm=isch&q=Eco-Friendly+Floor+Cleaner'
+          image: EcoFriendlyroofCleaner
         }
       ]
     }
@@ -55,14 +77,14 @@ export const subcategories = {
           name: 'Multi Millet Malt',
           price: 299,
           description: 'Nutritious millet-based malt for daily energy.',
-          image: 'https://www.google.com/search?tbm=isch&q=Multi+Millet+Malt'
+          image: MultiMilletMalt
         },
         {
           id: 20002,
           name: 'Herbal Immunity Drink',
           price: 189,
           description: 'Herbal formulation to support immunity.',
-          image: 'https://www.google.com/search?tbm=isch&q=Herbal+Immunity+Drink'
+          image: HerbalImmunityDrink
         }
       ]
     }
@@ -75,14 +97,14 @@ export const subcategories = {
           name: 'Little Millet Noodles',
           price: 99,
           description: 'Wholesome millet noodles, gluten-free.',
-          image: 'https://www.google.com/search?tbm=isch&q=Little+Millet+Noodles'
+          image: LittleMilletNoodles
         },
         {
           id: 30002,
           name: 'Beetroot Noodles',
           price: 109,
           description: 'Fiber-rich beetroot noodles for easy meals.',
-          image: 'https://www.google.com/search?tbm=isch&q=Beetroot+Noodles'
+          image: BeetrootNoodles
         }
       ]
     }
@@ -95,14 +117,14 @@ export const subcategories = {
           name: 'Mango Thokku', 
           price: 149,
           description: 'Tangy and spicy mango thokku made traditionally.',
-          image: 'https://www.google.com/search?tbm=isch&q=Mango+Thokku'
+          image: MangoThokku
         },
         {
           id: 40002,
           name: 'Lemon Pickle',
           price: 129,
           description: 'Classic lemon pickle with organic spices.',
-          image: 'https://www.google.com/search?tbm=isch&q=Lemon+Pickle'
+          image: LemonPickle
         }
       ]
     }
@@ -115,15 +137,16 @@ export const subcategories = {
           name: 'Red Rice',
           price: 99,
           description: 'Nutritious red rice, rich in iron and fiber.',
-          image: 'https://www.google.com/search?tbm=isch&q=Red+Rice'
+          image: RedRice
         },
         {
           id: 50002,
           name: 'Black Rice',
           price: 149,
           description: 'Exotic black rice with antioxidants.',
-          image: 'https://www.google.com/search?tbm=isch&q=Black+Rice'
-          /*image: 'https://www.google.com/search?tbm=isch&q=Black+Rice'*/
+
+          image: BlackRice
+
         }
       ]
     }
@@ -136,14 +159,14 @@ export const subcategories = {
           name: 'Groundnut Oil',
           price: 239,
           description: 'Organic cold pressed groundnut oil.',
-          image: 'https://www.google.com/search?tbm=isch&q=Groundnut+Oil'
+          image: GroundnuOil
         },
         {
           id: 60002,
           name: 'Sesame Oil',
           price: 209,
           description: 'Healthy sesame oil perfect for cooking.',
-          image: 'https://www.google.com/search?tbm=isch&q=Sesame+Oil'
+          image: SesamaOil
         }
       ]
     }
@@ -156,14 +179,14 @@ export const subcategories = {
           name: 'Vegetable Soup',
           price: 79,
           description: 'Hearty soup with organic dried vegetables.',
-          image: 'https://www.google.com/search?tbm=isch&q=Vegetable+Soup+organic'
+          image: VegetableSoup
         },
         {
           id: 70002,
           name: 'Millet Soup',
           price: 89,
           description: 'Protein-rich millet soup for healthy meals.',
-          image: 'https://www.google.com/search?tbm=isch&q=Millet+Soup+organic'
+          image: MilletSoup
         }
       ]
     }
@@ -176,14 +199,14 @@ export const subcategories = {
           name: 'Wild Forest Honey',
           price: 249,
           description: 'Pure wild honey direct from the forest.',
-          image: 'https://www.google.com/search?tbm=isch&q=Wild+Forest+Honey'
+          image: WildForestHoney
         },
         {
           id: 80002,
           name: 'Honey with Amla',
           price: 179,
           description: 'Natural amla-infused honey for immunity.',
-          image: 'https://www.google.com/search?tbm=isch&q=Honey+with+Amla'
+          image: HoneyWithAmla
         }
       ]
     }
@@ -196,14 +219,14 @@ export const subcategories = {
           name: 'Quinoa Puffs',
           price: 129,
           description: 'Crunchy, protein-rich quinoa puffs perfect for healthy snacking.',
-          image: 'https://www.google.com/search?tbm=isch&q=Quinoa+Puffs'
+          image: QuinoaPuffs
         },
         {
           id: 90002,
           name: 'Granola Bars',
           price: 149,
           description: 'Nutritious granola bars made with organic oats and dried fruits.',
-          image: 'https://www.google.com/search?tbm=isch&q=Granola+Bars'
+          image: GranolaBars
         }
       ]
     }
@@ -216,14 +239,14 @@ export const subcategories = {
           name: 'Organic Multivitamin',
           price: 349,
           description: 'Natural multivitamin supplement sourced from organic ingredients.',
-          image: 'https://www.google.com/search?tbm=isch&q=Organic+Multivitamin'
+          image: OrganicMultivitamin
         },
         {
           id: 100002,
           name: 'Immunity Booster',
           price: 249,
           description: 'Herbal immunity booster for daily health and wellness.',
-          image: 'https://www.google.com/search?tbm=isch&q=Immunity+Booster+organic'
+          image: ImmunityBooster
         }
       ]
     }
@@ -236,14 +259,14 @@ export const subcategories = {
           name: 'Organic Tomatoes',
           price: 89,
           description: 'Fresh organic tomatoes ideal for salads and cooking.',
-          image: 'https://www.google.com/search?tbm=isch&q=Organic+Tomatoes'
+          image: OrganicTomatoes
         },
         {
           id: 110002,
           name: 'Organic Spinach',
           price: 69,
           description: 'Leafy green spinach grown without synthetic pesticides.',
-          image: 'https://www.google.com/search?tbm=isch&q=Organic+Spinach'
+          image: OrganicSpinach
         }
       ]
     }
@@ -256,14 +279,14 @@ export const subcategories = {
           name: 'Herbal Face Wash',
           price: 299,
           description: 'Gentle face wash infused with natural herbal extracts.',
-          image: 'https://www.google.com/search?tbm=isch&q=Herbal+Face+Wash'
+          image: HerbalFaceWash
         },
         {
           id: 120002,
           name: 'Moisturizing Cream',
           price: 399,
           description: 'Hydrating moisturizer with plant-based ingredients suitable for all skin types.',
-          image: 'https://www.google.com/search?tbm=isch&q=Moisturizing+Cream+organic'
+          image: MoisturizingCream
         }
       ]
     }
