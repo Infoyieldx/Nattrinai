@@ -113,7 +113,7 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="w-full mx-auto sm:px-6 lg:px-8">
-       <div className="flex items-center justify-between h-16">
+       <div className="flex items-center justify-between h-[80px]">
         <div className="flex items-center">
           {/* Logo */}
           <img
@@ -197,10 +197,35 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
       {mobileMenuOpen && (
         <div className="md:hidden bg-white border-t">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link href="/" className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]">Home</Link>
-            <Link href="/products" className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]">Products</Link>
-            <Link href="/about" className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]">About</Link>
-            <Link href="/contact" className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]">Contact</Link>
+            <Link
+              href="/"
+              className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              href="/Products"
+              className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Products
+            </Link>
+             <Link
+              href="/About"
+              className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              About
+            </Link>
+             <Link
+              href="/Contact"
+              className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              ContactUs
+            </Link>
+            
           </div>
         </div>
       )}
