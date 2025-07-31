@@ -9,12 +9,13 @@ const DryFruitsCombos = ({ handleAddToCart, handleWishlistToggle, wishlistItems 
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-center text-[#3D3F24] mb-12">Dry Fruits Combo</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="overflow-x-auto custom-scrollbar">
+          <div className="flex space-x-6 pb-4" style={{ minWidth: 'max-content' }}>
           {dryFruitsCombos.map((product) => (
             <div
               key={product.id}
-              className="bg-[#EEECE5] rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-            >
+              className="flex-shrink-0 w-64">
+            
               <div className="relative">
                 <div
                   className="aspect-square overflow-hidden cursor-pointer"
@@ -64,8 +65,10 @@ const DryFruitsCombos = ({ handleAddToCart, handleWishlistToggle, wishlistItems 
                   Add to Cart
                 </button>
               </div>
+              
             </div>
           ))}
+        </div>
         </div>
       </div>
     </section>
