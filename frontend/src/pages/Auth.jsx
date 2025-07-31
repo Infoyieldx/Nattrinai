@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import axios from "axios";
 
 const Auth = () => {
@@ -12,6 +14,27 @@ const Auth = () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
+  /* ─────────────────────────────
+     Password strength checks
+  ───────────────────────────── */
+  const passwordChecks = {
+    length: password.length >= 8,
+    uppercase: /[A-Z]/.test(password),
+    lowercase: /[a-z]/.test(password),
+    number: /[0-9]/.test(password),
+    special: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+  };
+
+  const allValid =
+    passwordChecks.length &&
+    passwordChecks.uppercase &&
+    passwordChecks.lowercase &&
+    passwordChecks.number &&
+    passwordChecks.special;
+
+  /* ─────────────────────────────
+     Form helpers
+  ───────────────────────────── */
   const toggleForm = () => {
     setIsLogin((prev) => !prev);
     setEmail("");
@@ -22,6 +45,9 @@ const Auth = () => {
     setMessage("");
   };
 
+  /* ─────────────────────────────
+     Signup – Send OTP
+  ───────────────────────────── */
   const sendOtp = async () => {
     if (!email || !name || !password) {
       return alert("Fill name, email, and password before sending OTP");
@@ -39,10 +65,18 @@ const Auth = () => {
         setMessage(res.data.message || "OTP sending failed");
       }
     } catch (err) {
-      setMessage(err.response?.data?.message || "Error sending OTP");
+      const msg = err.response?.data?.message;
+      if (msg?.toLowerCase().includes("exists")) {
+        setMessage("Account already exists with this email.");
+      } else {
+        setMessage(msg || "Error sending OTP");
+      }
     }
   };
 
+  /* ─────────────────────────────
+     Signup – Verify OTP
+  ───────────────────────────── */
   const verifyOtpAndSignup = async () => {
     try {
       const res = await axios.post("http://localhost:5000/api/auth/verify-otp", {
@@ -60,6 +94,9 @@ const Auth = () => {
     }
   };
 
+  /* ─────────────────────────────
+     Login
+  ───────────────────────────── */
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -74,10 +111,20 @@ const Auth = () => {
         setMessage(res.data.message || "Login failed");
       }
     } catch (err) {
-      setMessage(err.response?.data?.message || "Login error");
+      const msg = err.response?.data?.message?.toLowerCase();
+      if (msg?.includes("wrong password")) {
+        setMessage("Wrong password");
+      } else if (msg?.includes("not found")) {
+        setMessage("Account not found");
+      } else {
+        setMessage("Login error");
+      }
     }
   };
 
+  /* ─────────────────────────────
+     JSX
+  ───────────────────────────── */
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f6f7f2] px-4">
       <form
@@ -112,25 +159,54 @@ const Auth = () => {
           required
         />
 
+        {/* Password field */}
         <input
           type="password"
           placeholder="Password"
-          className="w-full mb-6 px-4 py-2 border rounded-lg"
+          className="w-full mb-2 px-4 py-2 border rounded-lg"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
 
+        {/* Password rules (signup only) */}
+        {!isLogin && (
+          <div className="mb-4 text-sm text-gray-700 space-y-1">
+            <p className={passwordChecks.length ? "text-green-600" : "text-red-500"}>
+              • At least 8 characters
+            </p>
+            <p className={passwordChecks.uppercase ? "text-green-600" : "text-red-500"}>
+              • One uppercase letter
+            </p>
+            <p className={passwordChecks.lowercase ? "text-green-600" : "text-red-500"}>
+              • One lowercase letter
+            </p>
+            <p className={passwordChecks.number ? "text-green-600" : "text-red-500"}>
+              • One number
+            </p>
+            <p className={passwordChecks.special ? "text-green-600" : "text-red-500"}>
+              • One special character
+            </p>
+          </div>
+        )}
+
+        {/* Signup – Send OTP */}
         {!isLogin && !otpSent && (
           <button
             type="button"
-            className="w-full bg-[#4A5A2A] text-white py-2 rounded-lg hover:bg-[#3D3F24] mb-4"
+            className={`w-full text-white py-2 rounded-lg mb-4 ${
+              allValid
+                ? "bg-[#4A5A2A] hover:bg-[#3D3F24]"
+                : "bg-gray-400 cursor-not-allowed"
+            }`}
             onClick={sendOtp}
+            disabled={!allValid}
           >
             Send OTP
           </button>
         )}
 
+        {/* Signup – Verify OTP */}
         {!isLogin && otpSent && (
           <>
             <input
@@ -151,6 +227,7 @@ const Auth = () => {
           </>
         )}
 
+        {/* Login button */}
         {isLogin && (
           <button
             type="submit"
@@ -160,12 +237,17 @@ const Auth = () => {
           </button>
         )}
 
-        {isLogin && message.toLowerCase().includes("wrong password") && (
-          <p className="text-sm text-center mt-2 text-blue-600">
-            Forgot password? (Feature coming soon)
-          </p>
-        )}
+        {/* Wrong password hint */}
+       {isLogin && message.toLowerCase().includes("wrong password") && (
+  <p className="text-sm text-center mt-2 text-blue-600">
+    Forgot password?{" "}
+    <Link to="/forgot-password" className="underline">
+      Click here
+    </Link>
+  </p>
+)}
 
+        {/* Toggle link */}
         <p className="text-sm mt-4 text-center">
           {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
           <button

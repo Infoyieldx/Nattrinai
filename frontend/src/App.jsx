@@ -19,6 +19,8 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 import Auth from "./pages/Auth.jsx";
+import ForgotPassword  from  "./pages/Forgotpassword.jsx";
+
 import DryFruitsCombos from './components/DryFruitsCombos';
 
 function MainRouter() {
@@ -149,6 +151,8 @@ function MainRouter() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+
         <Route path="/profile" element={<Profile />} />
       </Routes>
       <Footer />
