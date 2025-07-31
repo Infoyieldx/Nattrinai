@@ -20,7 +20,7 @@ const Hero = () => {
           </p>
           <button
             onClick={() => navigate('/products')}
-            className="bg-[#4A5A2A] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#3D3F24] transition-colors whitespace-nowrap cursor-pointer"
+            className="bg-[#4A5A2A] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#3D3F24]  whitespace-nowrap cursor-pointer hover:scale-105 transition-transform"
           >
             Shop Now
           </button>

@@ -18,13 +18,13 @@ const DryFruitsCombos = ({ handleAddToCart, handleWishlistToggle, wishlistItems 
             
               <div className="relative">
                 <div
-                  className="aspect-square overflow-hidden cursor-pointer"
+                  className="aspect-square overflow-hidden cursor-pointer "
                   onClick={() => navigate(`/product/${product.id}`)}
                 >
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-cover object-top  hover:scale-125 transition-transform"
                   />
                 </div>
                 <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded text-sm font-semibold">
