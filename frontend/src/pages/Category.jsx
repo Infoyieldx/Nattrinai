@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useRoute } from 'wouter';
+import { useParams, useLocation } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import FilterSidebar from '../components/FilterSidebar';
 import { subcategories, getAllProducts } from '../data/products';
 
 const Category = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
-  const [match, params] = useRoute('/category/:categoryName');
+  const { categoryName } = useParams();
+  const location = useLocation();
+
   const [selectedSubcategory, setSelectedSubcategory] = useState('');
   const [products, setProducts] = useState([]);
   const [filters, setFilters] = useState({
@@ -14,15 +16,11 @@ const Category = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
     sortBy: ''
   });
 
-  const categoryName = params?.categoryName;
-  const urlParams = new URLSearchParams(window.location.search);
-  const subFromUrl = urlParams.get('sub') || '';
-
   useEffect(() => {
-    if (subFromUrl) {
-      setSelectedSubcategory(subFromUrl);
-    }
-  }, [subFromUrl]);
+    const urlParams = new URLSearchParams(location.search);
+    const subFromUrl = urlParams.get('sub') || '';
+    setSelectedSubcategory(subFromUrl);
+  }, [location.search]);
 
   useEffect(() => {
     if (!categoryName || !subcategories[categoryName]) {

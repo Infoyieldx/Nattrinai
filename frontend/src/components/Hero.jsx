@@ -1,7 +1,7 @@
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
 
   return (
     <section
@@ -15,9 +15,11 @@ const Hero = () => {
         <div className="text-white max-w-lg">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Nattrinai organic products</h1>
           <p className="text-xl mb-6">Fresh • Organic • Healthy</p>
-          <p className="text-lg mb-8">Discover the finest organic products from farm to your table. Pure, natural, and sustainably sourced.</p>
+          <p className="text-lg mb-8">
+            Discover the finest organic products from farm to your table. Pure, natural, and sustainably sourced.
+          </p>
           <button
-            onClick={() => setLocation('/products')}
+            onClick={() => navigate('/products')}
             className="bg-[#4A5A2A] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#3D3F24] transition-colors whitespace-nowrap cursor-pointer"
           >
             Shop Now

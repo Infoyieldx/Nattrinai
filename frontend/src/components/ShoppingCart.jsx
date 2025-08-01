@@ -1,4 +1,4 @@
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
 
 const ShoppingCart = ({
   showCart,
@@ -9,11 +9,11 @@ const ShoppingCart = ({
   getCartTotal,
   handleCheckout
 }) => {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
 
   const proceedToCheckout = () => {
     setShowCart(false);
-    setLocation('/checkout');
+    navigate('/checkout');
   };
 
   if (!showCart) return null;
@@ -25,7 +25,7 @@ const ShoppingCart = ({
         className="fixed inset-0 bg-black bg-opacity-50 z-40"
         onClick={() => setShowCart(false)}
       ></div>
-      
+
       {/* Cart Sidebar */}
       <div className="fixed inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl transform transition-transform z-50">
         <div className="h-full flex flex-col">
@@ -38,7 +38,7 @@ const ShoppingCart = ({
               <i className="fas fa-times text-xl"></i>
             </button>
           </div>
-          
+
           <div className="flex-1 overflow-y-auto p-6">
             {cartItems.length === 0 ? (
               <div className="text-center py-12">

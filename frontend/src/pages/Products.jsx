@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'wouter';
+import { useLocation } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import FilterSidebar from '../components/FilterSidebar';
 import { getAllProducts, getProductsByCategory, getProductCategory } from '../data/products';
 
 const Products = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
-  const [location] = useLocation();
+  const location = useLocation(); // from react-router-dom
+  const [sortBy, setSortBy] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filters, setFilters] = useState({
     categories: [],
@@ -14,15 +15,15 @@ const Products = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
   });
 
   // Extract search query from URL
-  const urlParams = new URLSearchParams(window.location.search);
+  const urlParams = new URLSearchParams(location.search);
   const searchQuery = urlParams.get('search') || '';
 
   useEffect(() => {
     const allProducts = getAllProducts();
 
     let products = allProducts;
-    
-    // Apply search filter
+
+    // Filter by search
     if (searchQuery) {
       products = products.filter(product =>
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -105,7 +106,7 @@ const Products = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
                 <ProductCard
                   key={product.id}
                   product={product}
-                  onAddToCart={handleAddToCart}
+                  onAddToCart={handleAddToCart} 
                   onWishlistToggle={handleWishlistToggle}
                   isInWishlist={wishlistItems.some(item => item.id === product.id)}
                   showBuyNow={true}

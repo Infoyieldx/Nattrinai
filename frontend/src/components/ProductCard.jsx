@@ -1,15 +1,15 @@
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard = ({ product, onAddToCart, onWishlistToggle, isInWishlist, showBuyNow = false }) => {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
 
   const handleProductClick = () => {
-    setLocation(`/product/${product.id}`);
+    navigate(`/product/${product.id}`);
   };
 
   const handleBuyNow = () => {
     onAddToCart(product);
-    setLocation('/checkout');
+    navigate('/checkout');
   };
 
   return (
