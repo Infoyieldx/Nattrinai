@@ -5,6 +5,7 @@ import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useState } from "react";
+import { useLocation } from 'react-router-dom';
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -20,6 +21,8 @@ import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 import Auth from "./pages/Auth.jsx";
 import ForgotPassword  from  "./pages/Forgotpassword.jsx";
+import AdminDashboard from "./admin/AdminDashboard.jsx";
+
 
 import DryFruitsCombos from './components/DryFruitsCombos';
 
@@ -109,6 +112,10 @@ function MainRouter() {
     setCartCount(0);
     setCheckoutStep(4);
   };
+   const location = useLocation();
+const path = location.pathname;
+const isAdminRoute = path.startsWith("/admin");
+
 
   const sharedProps = {
     cartItems,
@@ -140,7 +147,7 @@ function MainRouter() {
 
   return (
     <div className="min-h-screen bg-[#EEECE5]">
-      <Header {...sharedProps} />
+       {!isAdminRoute && <Header {...sharedProps} />}
       <Routes>
         <Route path="/" element={<Home {...sharedProps} />} />
         <Route path="/products" element={<Products {...sharedProps} />} />
@@ -154,9 +161,12 @@ function MainRouter() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
 
         <Route path="/profile" element={<Profile />} />
+        <Route path="admin" element={<AdminDashboard />} />
+        
       </Routes>
-      <Footer />
+      {!isAdminRoute && <Footer />}
       <ShoppingCart {...sharedProps} />
+      
     </div>
   );
 }

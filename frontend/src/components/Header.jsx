@@ -145,7 +145,7 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
           <div className="flex items-center space-x-7">
             <Link to="/wishlist">
               <div className="relative cursor-pointer">
-                <i className="fas fa-heart text-[#4A5A2A] text-xl"></i>
+                <i className="fas fa-heart text-[#4A5A2A] text-xl hover:scale-125 transition-transform"></i>
                 {wishlistCount > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {wishlistCount}
@@ -155,7 +155,7 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
             </Link>
 
             <button onClick={() => setShowCart(true)} className="relative cursor-pointer">
-              <i className="fas fa-shopping-cart text-[#4A5A2A] text-xl"></i>
+              <i className="fas fa-shopping-cart text-[#4A5A2A] text-xl hover:scale-125 transition-transform"></i>
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                   {cartCount}
@@ -165,7 +165,7 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
 
             <Link to="/profile">
               <div className="cursor-pointer">
-                <i className="fas fa-user text-[#4A5A2A] text-xl"></i>
+                <i className="fas fa-user text-[#4A5A2A] text-xl hover:scale-125 transition-transform"></i>
               </div>
             </Link>
 
@@ -173,7 +173,7 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden text-[#4A5A2A] cursor-pointer"
             >
-              <i className="fas fa-bars text-xl"></i>
+              <i className="fas fa-bars text-xl w-10"></i>
             </button>
           </div>
         </div>
@@ -183,10 +183,34 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
       {mobileMenuOpen && (
         <div className="md:hidden bg-white border-t">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link to="/" className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]">Home</Link>
-            <Link to="/products" className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]">Products</Link>
-            <Link to="/about" className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]">About</Link>
-            <Link to="/contact" className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]">Contact</Link>
+            <Link
+              to="/"
+              className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              to="/products"
+              className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Products
+            </Link>
+            <Link
+              to="/about"
+              className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              About
+            </Link>
+            <Link
+              to="/contact"
+              className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Contact
+            </Link>
           </div>
         </div>
       )}

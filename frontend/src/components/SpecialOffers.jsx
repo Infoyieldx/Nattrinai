@@ -22,7 +22,7 @@ const SpecialOffers = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-cover object-top  hover:scale-125 transition-transform"
                   />
                 </div>
                 <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-sm font-semibold">
@@ -50,7 +50,7 @@ const SpecialOffers = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
                       e.stopPropagation();
                       handleAddToCart(product);
                     }}
-                    className="flex-1 bg-[#4A5A2A] text-white py-2 rounded-lg font-semibold hover:bg-[#3D3F24] transition-colors whitespace-nowrap cursor-pointer"
+                    className="flex-1 bg-[#4A5A2A] text-[10px] text-white py-2 rounded-lg font-semibold hover:bg-[#3D3F24] transition-colors whitespace-nowrap cursor-pointer"
                   >
                     Add to Cart
                   </button>
@@ -60,7 +60,7 @@ const SpecialOffers = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
                       handleAddToCart(product);
                       // Navigate to checkout would be handled by parent
                     }}
-                    className="flex-1 bg-orange-500 text-white py-2 rounded-lg font-semibold hover:bg-orange-600 transition-colors whitespace-nowrap cursor-pointer"
+                    className="flex-1 bg-orange-500 text-[10px] text-white py-2 rounded-lg font-semibold hover:bg-orange-600 transition-colors whitespace-nowrap cursor-pointer"
                   >
                     Buy Now
                   </button>
