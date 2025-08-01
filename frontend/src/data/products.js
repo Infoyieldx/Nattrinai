@@ -36,12 +36,12 @@ import HerbalFaceWash from '../assets/herbal_face_wash.png';
 export const categories = [
   { id: 1, name: 'Home Living', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrstpSyxesTX5dYk1YTZDohUwlZPRA3nFWRw&s' },
   { id: 2, name: 'Health Drinks', image: HealthDrinks },
-  { id: 3, name: 'Noodles', image: Noodles },
+  { id: 3, name: 'Honey Items', image: Honey },
   { id: 4, name: 'Pickles', image: Pickles },
   { id: 5, name: 'Rice', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuHoWi-l5aP2nqF-1GUKqJR-zpAAJ6Xup7PA&s' },
   { id: 6, name: 'Oil', image: Oil },
   { id: 7, name: 'Soups', image: Soups },
-  { id: 8, name: 'Honey Items', image: Honey },
+  { id: 8, name: 'Noodles', image: Noodles },
   { id: 9, name: 'Food', image: Food },
   { id: 10, name: 'Health', image: Health },
   { id: 11, name: 'Grocery', image: Grocery },
@@ -307,10 +307,10 @@ export const dryFruitsCombos = [
 ];
 
 export const trendingProducts = [
-  { id: 14002, name: 'Pure Ghee', price: 299, description: 'Traditional pure ghee made from organic cow milk. Perfect for cooking and ayurvedic wellness.', image: 'https://readdy.ai/api/search-image?query=pure%20organic%20ghee%20in%20glass%20jar%20on%20clean%20white%20background%20natural%20lighting%20traditional%20dairy%20product%20concept&width=300&height=300&seq=tp002&orientation=squarish' },
+  { id: 14002, name: 'Pure Ghee', price: 799, description: 'Traditional pure ghee made from organic cow milk. Perfect for cooking and ayurvedic wellness.', image: 'https://readdy.ai/api/search-image?query=pure%20organic%20ghee%20in%20glass%20jar%20on%20clean%20white%20background%20natural%20lighting%20traditional%20dairy%20product%20concept&width=300&height=300&seq=tp002&orientation=squarish' },
   { id: 14001, name: 'Organic Honey', price: 159, description: 'Pure organic honey harvested from wildflowers. Rich in antioxidants and natural enzymes.', image: 'https://readdy.ai/api/search-image?query=organic%20honey%20jar%20with%20wooden%20dipper%20on%20clean%20white%20background%20natural%20lighting%20pure%20golden%20honey%20concept&width=300&height=300&seq=tp001&orientation=squarish' },
   { id: 14003, name: 'Coconut Oil', price: 199, description: 'Cold-pressed organic coconut oil. Great for cooking, skincare, and hair care.', image: 'https://readdy.ai/api/search-image?query=organic%20coconut%20oil%20in%20glass%20bottle%20with%20coconut%20pieces%20on%20clean%20white%20background%20natural%20lighting%20healthy%20cooking%20concept&width=300&height=300&seq=tp003&orientation=squarish' },
-  { id: 14004, name: 'Red Rice', price: 89, description: 'Nutritious red rice packed with antioxidants. A healthy alternative to regular rice.', image: 'https://readdy.ai/api/search-image?query=organic%20red%20rice%20grains%20in%20bowl%20on%20clean%20white%20background%20natural%20lighting%20healthy%20grain%20concept&width=300&height=300&seq=tp004&orientation=squarish' },
+  { id: 14004, name: 'Red Rice', price: 100, description: 'Nutritious red rice packed with antioxidants. A healthy alternative to regular rice.', image: 'https://readdy.ai/api/search-image?query=organic%20red%20rice%20grains%20in%20bowl%20on%20clean%20white%20background%20natural%20lighting%20healthy%20grain%20concept&width=300&height=300&seq=tp004&orientation=squarish' },
   { id: 14005, name: 'Turmeric Powder', price: 79, description: 'Pure organic turmeric powder with anti-inflammatory properties. Essential for healthy cooking.', image: 'https://readdy.ai/api/search-image?query=organic%20turmeric%20powder%20in%20wooden%20bowl%20with%20fresh%20turmeric%20root%20on%20clean%20white%20background%20natural%20lighting%20spice%20concept&width=300&height=300&seq=tp005&orientation=squarish' },
   { id: 14006, name: 'Green Tea', price: 129, description: 'Premium organic green tea leaves. Rich in antioxidants and perfect for daily wellness.', image: 'https://readdy.ai/api/search-image?query=organic%20green%20tea%20leaves%20in%20elegant%20container%20on%20clean%20white%20background%20natural%20lighting%20healthy%20beverage%20concept&width=300&height=300&seq=tp006&orientation=squarish' }
 ];
