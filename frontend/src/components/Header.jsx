@@ -98,7 +98,7 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="w-full mx-auto sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-[80px]">
           {/* Logo */}
           <Link to="/" onClick={handleClick}>
             <img
@@ -147,7 +147,7 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
               <div className="relative cursor-pointer">
                 <i className="fas fa-heart text-[#4A5A2A] text-xl hover:scale-125 transition-transform"></i>
                 {wishlistCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center ">
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {wishlistCount}
                   </span>
                 )}
@@ -183,7 +183,6 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
       {mobileMenuOpen && (
         <div className="md:hidden bg-white border-t">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            
             <Link
               to="/"
               className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]"
@@ -192,27 +191,26 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
               Home
             </Link>
             <Link
-              to="/Products"
+              to="/products"
               className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]"
               onClick={() => setMobileMenuOpen(false)}
             >
               Products
             </Link>
-             <Link
-              to="/About"
+            <Link
+              to="/about"
               className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]"
               onClick={() => setMobileMenuOpen(false)}
             >
               About
             </Link>
-             <Link
-              to="/Contact"
+            <Link
+              to="/contact"
               className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]"
               onClick={() => setMobileMenuOpen(false)}
             >
-              ContactUs
+              Contact
             </Link>
-            
           </div>
         </div>
       )}
