@@ -99,7 +99,6 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="w-full mx-auto sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[80px]">
-<<<<<<< HEAD
           {/* Left Section: Logo & Desktop Nav */}
           <div className="flex items-center">
             <Link to="/" onClick={handleClick}>
@@ -111,7 +110,6 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
                 }`}
               />
             </Link>
-=======
           {/* Logo */}
           <Link to="/" onClick={handleClick}>
             <img
@@ -122,7 +120,6 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
               }`}
             />
           </Link>
->>>>>>> f3e0a4b966b926f018025b197ca383264846b5bd
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
