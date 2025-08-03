@@ -11,7 +11,7 @@ const Categories = () => {
   return (
     <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6  lg:px-8">
       <h2 className="text-3xl font-bold text-center text-[#3D3F24] mb-12">Shop by Category</h2>
-      <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6  gap-6">
+      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6  gap-6">
         {categories.map((category) => (
           <div
             key={category.id}
@@ -22,7 +22,7 @@ const Categories = () => {
               <img
                 src={category.image}
                 alt={category.name}
-                className="w-full h-full object-cover object-top hover:scale-105 transition-transform"
+                className="w-full h-full object-cover object-top hover:scale-125 transition-transform"
               />
             </div>
             <div className="p-4 text-center">

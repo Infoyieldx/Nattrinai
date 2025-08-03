@@ -8,18 +8,40 @@ import Noodles from '../assets/noodels.jpeg';
 import Pickles from '../assets/pickel.jpeg';
 import Oil from '../assets/botel.png';
 import HealthDrinks from '../assets/helath-drinks.jpeg';
-
-
+import HerbalairFreshener from '../assets/herbal_room_freshener.png';
+import EcoFriendlyroofCleaner from '../assets/eco_friendly_roof_cleaner.png';
+import MultiMilletMalt from '../assets/multi_millet_malt.png';
+import HerbalImmunityDrink from '../assets/herbal_immunity_drink.png';
+import LittleMilletNoodles from '../assets/little_millet_noodles.png';
+import BeetrootNoodles from '../assets/beetroot_noodles.png';
+import MangoThokku from '../assets/mango_thokku.png';
+import LemonPickle from '../assets/lemon_pickle.png';
+import RedRice from '../assets/red_rice.png';
+import BlackRice from '../assets/black_rice.png';
+import GroundnuOil from '../assets/groundnut_oil.png';
+import SesamaOil from '../assets/sesame_oil.png';
+import VegetableSoup from '../assets/vegetable_soup.png';
+import MilletSoup from '../assets/millet_soup.png';
+import WildForestHoney from '../assets/wild_forest_honey.png';
+import HoneyWithAmla from '../assets/honey_with_amla.png';
+import QuinoaPuffs from '../assets/quinoa_puffs.png';
+import GranolaBars from '../assets/granola_bars.png';
+import OrganicMultivitamin from '../assets/organic_multivitamin.png';
+import ImmunityBooster from '../assets/immunity_booster.png';
+import OrganicTomatoes from '../assets/organic_tomatoes.png';
+import OrganicSpinach from '../assets/organic_spinach.png';
+import MoisturizingCream from '../assets/moisturizing_cream.png';
+import HerbalFaceWash from '../assets/herbal_face_wash.png';
 
 export const categories = [
   { id: 1, name: 'Home Living', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrstpSyxesTX5dYk1YTZDohUwlZPRA3nFWRw&s' },
   { id: 2, name: 'Health Drinks', image: HealthDrinks },
-  { id: 3, name: 'Noodles', image: Noodles },
+  { id: 3, name: 'Honey Items', image: Honey },
   { id: 4, name: 'Pickles', image: Pickles },
   { id: 5, name: 'Rice', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuHoWi-l5aP2nqF-1GUKqJR-zpAAJ6Xup7PA&s' },
   { id: 6, name: 'Oil', image: Oil },
   { id: 7, name: 'Soups', image: Soups },
-  { id: 8, name: 'Honey Items', image: Honey },
+  { id: 8, name: 'Noodles', image: Noodles },
   { id: 9, name: 'Food', image: Food },
   { id: 10, name: 'Health', image: Health },
   { id: 11, name: 'Grocery', image: Grocery },
@@ -29,246 +51,276 @@ export const categories = [
 export const subcategories = {
   'Home Living': [
     {
-      id: 1, name: 'Home Needs', products: [
-         {
+      id: 1, 
+      name: 'Home Needs', 
+      products: [
+        {
           id: 10001,
           name: 'Herbal air Freshener',
           price: 499,
           description: 'Natural herbal air freshener to uplift your home.',
-          image: 'https://www.google.com/search?tbm=isch&q=Herbal+Room+Freshener'
+          image: HerbalairFreshener
         },
         {
           id: 10002,
           name: 'Eco-Friendly roof Cleaner',
           price: 190,
           description: 'Safe, organic floor cleaner for healthy homes.',
-          image: 'https://www.google.com/search?tbm=isch&q=Eco-Friendly+Floor+Cleaner'
+          image: EcoFriendlyroofCleaner
         }
       ]
     }
   ],
   'Health Drinks': [
     {
-      id: 2, name: 'Energy Boosters', products: [
+      id: 2, 
+      name: 'Energy Boosters', 
+      products: [
         {
           id: 20001,
           name: 'Multi Millet Malt',
           price: 299,
           description: 'Nutritious millet-based malt for daily energy.',
-          image: 'https://www.google.com/search?tbm=isch&q=Multi+Millet+Malt'
+          image: MultiMilletMalt
         },
         {
           id: 20002,
           name: 'Herbal Immunity Drink',
           price: 189,
           description: 'Herbal formulation to support immunity.',
-          image: 'https://www.google.com/search?tbm=isch&q=Herbal+Immunity+Drink'
+          image: HerbalImmunityDrink
         }
       ]
     }
   ],
   'Noodles': [
     {
-      id: 1, name: 'Instant Healthy Noodles', products: [
+      id: 1, 
+      name: 'Instant Healthy Noodles', 
+      products: [
         {
           id: 30001,
           name: 'Little Millet Noodles',
           price: 99,
           description: 'Wholesome millet noodles, gluten-free.',
-          image: 'https://www.google.com/search?tbm=isch&q=Little+Millet+Noodles'
+          image: LittleMilletNoodles
         },
         {
           id: 30002,
           name: 'Beetroot Noodles',
           price: 109,
           description: 'Fiber-rich beetroot noodles for easy meals.',
-          image: 'https://www.google.com/search?tbm=isch&q=Beetroot+Noodles'
+          image: BeetrootNoodles
         }
       ]
     }
   ],
   'Pickles': [
     {
-      id: 1, name: 'Traditional Pickles', products: [
+      id: 1, 
+      name: 'Traditional Pickles', 
+      products: [
         {
           id: 40001,
-          name: 'Mango Thokku',
+          name: 'Mango Thokku', 
           price: 149,
           description: 'Tangy and spicy mango thokku made traditionally.',
-          image: 'https://www.google.com/search?tbm=isch&q=Mango+Thokku'
+          image: MangoThokku
         },
         {
           id: 40002,
           name: 'Lemon Pickle',
           price: 129,
           description: 'Classic lemon pickle with organic spices.',
-          image: 'https://www.google.com/search?tbm=isch&q=Lemon+Pickle'
+          image: LemonPickle
         }
       ]
     }
   ],
   'Rice': [
     {
-      id: 1, name: 'Organic Rice Varieties', products: [
+      id: 1, 
+      name: 'Organic Rice Varieties', 
+      products: [
         {
           id: 50001,
           name: 'Red Rice',
           price: 99,
           description: 'Nutritious red rice, rich in iron and fiber.',
-          image: 'https://www.google.com/search?tbm=isch&q=Red+Rice'
+          image: RedRice
         },
         {
           id: 50002,
           name: 'Black Rice',
           price: 149,
           description: 'Exotic black rice with antioxidants.',
-          image: 'https://www.google.com/search?tbm=isch&q=Black+Rice'
+          image: BlackRice
         }
       ]
     }
   ],
   'Oil': [
     {
-      id: 1, name: 'Cold Pressed Oils', products: [
+      id: 1, 
+      name: 'Cold Pressed Oils', 
+      products: [
         {
           id: 60001,
           name: 'Groundnut Oil',
           price: 239,
           description: 'Organic cold pressed groundnut oil.',
-          image: 'https://www.google.com/search?tbm=isch&q=Groundnut+Oil'
+          image: GroundnuOil
         },
         {
           id: 60002,
           name: 'Sesame Oil',
           price: 209,
           description: 'Healthy sesame oil perfect for cooking.',
-          image: 'https://www.google.com/search?tbm=isch&q=Sesame+Oil'
+          image: SesamaOil
+        },
+        {
+          id: 60003,
+          name: 'Coconut Oil',
+          price: 199,
+          description: 'Cold-pressed organic coconut oil.',
+          image: 'https://readdy.ai/api/search-image?query=organic%20coconut%20oil%20in%20glass%20bottle%20with%20coconut%20pieces%20on%20clean%20white%20background%20natural%20lighting%20healthy%20cooking%20concept&width=300&height=300&seq=tp003&orientation=squarish'
         }
       ]
     }
   ],
   'Soups': [
     {
-      id: 1, name: 'Organic Ready Soups', products: [
+      id: 1, 
+      name: 'Organic Ready Soups', 
+      products: [
         {
           id: 70001,
           name: 'Vegetable Soup',
           price: 79,
           description: 'Hearty soup with organic dried vegetables.',
-          image: 'https://www.google.com/search?tbm=isch&q=Vegetable+Soup+organic'
+          image: VegetableSoup
         },
         {
           id: 70002,
           name: 'Millet Soup',
           price: 89,
           description: 'Protein-rich millet soup for healthy meals.',
-          image: 'https://www.google.com/search?tbm=isch&q=Millet+Soup+organic'
+          image: MilletSoup
         }
       ]
     }
   ],
   'Honey Items': [
     {
-      id: 1, name: 'Raw Honey & Mixes', products: [
+      id: 1, 
+      name: 'Raw Honey & Mixes', 
+      products: [
         {
           id: 80001,
           name: 'Wild Forest Honey',
           price: 249,
           description: 'Pure wild honey direct from the forest.',
-          image: 'https://www.google.com/search?tbm=isch&q=Wild+Forest+Honey'
+          image: WildForestHoney
         },
         {
           id: 80002,
           name: 'Honey with Amla',
           price: 179,
           description: 'Natural amla-infused honey for immunity.',
-          image: 'https://www.google.com/search?tbm=isch&q=Honey+with+Amla'
+          image: HoneyWithAmla
         }
       ]
     }
   ],
   'Food': [
     {
-      id: 9, name: 'Organic Snacks', products: [
+      id: 9, 
+      name: 'Organic Snacks', 
+      products: [
         {
           id: 90001,
           name: 'Quinoa Puffs',
           price: 129,
           description: 'Crunchy, protein-rich quinoa puffs perfect for healthy snacking.',
-          image: 'https://www.google.com/search?tbm=isch&q=Quinoa+Puffs'
+          image: QuinoaPuffs
         },
         {
           id: 90002,
           name: 'Granola Bars',
           price: 149,
           description: 'Nutritious granola bars made with organic oats and dried fruits.',
-          image: 'https://www.google.com/search?tbm=isch&q=Granola+Bars'
+          image: GranolaBars
         }
       ]
     }
   ],
   'Health': [
     {
-      id: 10, name: 'Supplements', products: [
+      id: 10, 
+      name: 'Supplements', 
+      products: [
         {
           id: 100001,
           name: 'Organic Multivitamin',
           price: 349,
           description: 'Natural multivitamin supplement sourced from organic ingredients.',
-          image: 'https://www.google.com/search?tbm=isch&q=Organic+Multivitamin'
+          image: OrganicMultivitamin
         },
         {
           id: 100002,
           name: 'Immunity Booster',
           price: 249,
           description: 'Herbal immunity booster for daily health and wellness.',
-          image: 'https://www.google.com/search?tbm=isch&q=Immunity+Booster+organic'
+          image: ImmunityBooster
         }
       ]
     }
   ],
   'Grocery': [
     {
-      id: 11, name: 'Fresh Produce', products: [
+      id: 11, 
+      name: 'Fresh Produce', 
+      products: [
         {
           id: 110001,
           name: 'Organic Tomatoes',
           price: 89,
           description: 'Fresh organic tomatoes ideal for salads and cooking.',
-          image: 'https://www.google.com/search?tbm=isch&q=Organic+Tomatoes'
+          image: OrganicTomatoes
         },
         {
           id: 110002,
           name: 'Organic Spinach',
           price: 69,
           description: 'Leafy green spinach grown without synthetic pesticides.',
-          image: 'https://www.google.com/search?tbm=isch&q=Organic+Spinach'
+          image: OrganicSpinach
         }
       ]
     }
   ],
   'Beauty': [
     {
-      id: 12, name: 'Face Care', products: [
+      id: 12, 
+      name: 'Face Care', 
+      products: [
         {
           id: 120001,
           name: 'Herbal Face Wash',
           price: 299,
           description: 'Gentle face wash infused with natural herbal extracts.',
-          image: 'https://www.google.com/search?tbm=isch&q=Herbal+Face+Wash'
+          image: HerbalFaceWash
         },
         {
           id: 120002,
           name: 'Moisturizing Cream',
           price: 399,
           description: 'Hydrating moisturizer with plant-based ingredients suitable for all skin types.',
-          image: 'https://www.google.com/search?tbm=isch&q=Moisturizing+Cream+organic'
+          image: MoisturizingCream
         }
       ]
     }
   ]
 };
-
 
 export const dryFruitsCombos = [
   { id: 13001, name: 'Premium Dry Fruits', price: 299, originalPrice: 399, discount: 25, description: 'Premium mix of almonds, cashews, and raisins. Rich in nutrients and perfect for healthy snacking.', image: 'https://readdy.ai/api/search-image?query=premium%20mixed%20dry%20fruits%20almonds%20cashews%20raisins%20in%20wooden%20bowl%20on%20clean%20white%20background%20natural%20lighting%20healthy%20snack%20concept&width=300&height=300&seq=df001&orientation=squarish' },
@@ -279,14 +331,13 @@ export const dryFruitsCombos = [
   { id: 13006, name: 'Exotic Mix Nuts', price: 249, originalPrice: 329, discount: 24, description: 'Exotic blend of pistachios, walnuts, and hazelnuts. Provides essential fatty acids and protein.', image: 'https://readdy.ai/api/search-image?query=exotic%20mixed%20nuts%20pistachios%20walnuts%20hazelnuts%20in%20elegant%20bowl%20on%20clean%20white%20background%20natural%20lighting%20premium%20quality%20concept&width=300&height=300&seq=df002&orientation=squarish' },
   { id: 13007, name: 'Healthy Trail Mix', price: 199, originalPrice: 249, discount: 20, description: 'Perfect blend of nuts, seeds, and dried fruits. Ideal for on-the-go energy and nutrition.', image: 'https://readdy.ai/api/search-image?query=healthy%20trail%20mix%20with%20nuts%20dried%20fruits%20seeds%20in%20rustic%20bowl%20on%20clean%20white%20background%20natural%20lighting%20energy%20snack%20concept&width=300&height=300&seq=df003&orientation=squarish' },
   { id: 13008, name: 'Organic Dates Mix', price: 179, originalPrice: 229, discount: 22, description: 'Natural sweetness of organic dates mixed with nuts. Rich in fiber and natural sugars.', image: 'https://readdy.ai/api/search-image?query=organic%20dates%20mixed%20with%20nuts%20in%20traditional%20bowl%20on%20clean%20white%20background%20natural%20lighting%20sweet%20healthy%20concept&width=300&height=300&seq=df004&orientation=squarish' }
-
 ];
 
 export const trendingProducts = [
-  { id: 14002, name: 'Pure Ghee', price: 299, description: 'Traditional pure ghee made from organic cow milk. Perfect for cooking and ayurvedic wellness.', image: 'https://readdy.ai/api/search-image?query=pure%20organic%20ghee%20in%20glass%20jar%20on%20clean%20white%20background%20natural%20lighting%20traditional%20dairy%20product%20concept&width=300&height=300&seq=tp002&orientation=squarish' },
   { id: 14001, name: 'Organic Honey', price: 159, description: 'Pure organic honey harvested from wildflowers. Rich in antioxidants and natural enzymes.', image: 'https://readdy.ai/api/search-image?query=organic%20honey%20jar%20with%20wooden%20dipper%20on%20clean%20white%20background%20natural%20lighting%20pure%20golden%20honey%20concept&width=300&height=300&seq=tp001&orientation=squarish' },
+  { id: 14002, name: 'Pure Ghee', price: 799, description: 'Traditional pure ghee made from organic cow milk. Perfect for cooking and ayurvedic wellness.', image: 'https://readdy.ai/api/search-image?query=pure%20organic%20ghee%20in%20glass%20jar%20on%20clean%20white%20background%20natural%20lighting%20traditional%20dairy%20product%20concept&width=300&height=300&seq=tp002&orientation=squarish' },
   { id: 14003, name: 'Coconut Oil', price: 199, description: 'Cold-pressed organic coconut oil. Great for cooking, skincare, and hair care.', image: 'https://readdy.ai/api/search-image?query=organic%20coconut%20oil%20in%20glass%20bottle%20with%20coconut%20pieces%20on%20clean%20white%20background%20natural%20lighting%20healthy%20cooking%20concept&width=300&height=300&seq=tp003&orientation=squarish' },
-  { id: 14004, name: 'Red Rice', price: 89, description: 'Nutritious red rice packed with antioxidants. A healthy alternative to regular rice.', image: 'https://readdy.ai/api/search-image?query=organic%20red%20rice%20grains%20in%20bowl%20on%20clean%20white%20background%20natural%20lighting%20healthy%20grain%20concept&width=300&height=300&seq=tp004&orientation=squarish' },
+  { id: 14004, name: 'Red Rice', price: 100, description: 'Nutritious red rice packed with antioxidants. A healthy alternative to regular rice.', image: 'https://readdy.ai/api/search-image?query=organic%20red%20rice%20grains%20in%20bowl%20on%20clean%20white%20background%20natural%20lighting%20healthy%20grain%20concept&width=300&height=300&seq=tp004&orientation=squarish' },
   { id: 14005, name: 'Turmeric Powder', price: 79, description: 'Pure organic turmeric powder with anti-inflammatory properties. Essential for healthy cooking.', image: 'https://readdy.ai/api/search-image?query=organic%20turmeric%20powder%20in%20wooden%20bowl%20with%20fresh%20turmeric%20root%20on%20clean%20white%20background%20natural%20lighting%20spice%20concept&width=300&height=300&seq=tp005&orientation=squarish' },
   { id: 14006, name: 'Green Tea', price: 129, description: 'Premium organic green tea leaves. Rich in antioxidants and perfect for daily wellness.', image: 'https://readdy.ai/api/search-image?query=organic%20green%20tea%20leaves%20in%20elegant%20container%20on%20clean%20white%20background%20natural%20lighting%20healthy%20beverage%20concept&width=300&height=300&seq=tp006&orientation=squarish' }
 ];
@@ -309,16 +360,12 @@ export const getAllProducts = () => {
   ];
 };
 
-
-// Get products by category
 export const getProductsByCategory = (categoryName) => {
   if (!subcategories[categoryName]) return [];
   return subcategories[categoryName].flatMap(sub => sub.products);
 };
 
-// Get category for a product
 export const getProductCategory = (productId) => {
-  // Check in subcategories first
   for (const [categoryName, subcats] of Object.entries(subcategories)) {
     for (const subcat of subcats) {
       if (subcat.products.some(p => p.id === productId)) {
@@ -327,7 +374,6 @@ export const getProductCategory = (productId) => {
     }
   }
   
-  // Check in other product arrays
   if (dryFruitsCombos.some(p => p.id === productId)) return 'Grocery';
   if (trendingProducts.some(p => p.id === productId)) return 'Grocery';
   if (specialOffers.some(p => p.id === productId)) return 'Grocery';
@@ -335,8 +381,82 @@ export const getProductCategory = (productId) => {
   return null;
 };
 
-// Get product by ID from all products
+export const getProductSubcategory = (productId) => {
+  for (const [categoryName, subcats] of Object.entries(subcategories)) {
+    for (const subcat of subcats) {
+      if (subcat.products.some(p => p.id === productId)) {
+        return subcat.name;
+      }
+    }
+  }
+  return null;
+};
+
 export const getProductById = (productId) => {
   const allProducts = getAllProducts();
   return allProducts.find(product => product.id === parseInt(productId));
+};
+
+export const getRelatedProducts = (productId) => {
+  const currentProduct = getProductById(productId);
+  if (!currentProduct) return [];
+  
+  const category = getProductCategory(productId);
+  const subcategory = getProductSubcategory(productId);
+  const allProducts = getAllProducts();
+  
+  // 1. Get products from same subcategory (most relevant)
+  let related = [];
+  if (subcategory) {
+    for (const subcat of subcategories[category] || []) {
+      if (subcat.name === subcategory) {
+        related = subcat.products.filter(p => p.id !== productId);
+        break;
+      }
+    }
+  }
+
+  // 2. If not enough, get from same category
+  if (related.length < 4) {
+    const categoryProducts = getProductsByCategory(category)
+      .filter(p => p.id !== productId && !related.some(r => r.id === p.id));
+    related = [...related, ...categoryProducts.slice(0, 4 - related.length)];
+  }
+
+  // 3. If still not enough, get from similar price range (±25%)
+  if (related.length < 4) {
+    const priceRange = currentProduct.price * 0.25;
+    const priceRangeProducts = allProducts.filter(p => 
+      p.id !== productId &&
+      !related.some(r => r.id === p.id) &&
+      p.price >= currentProduct.price - priceRange && 
+      p.price <= currentProduct.price + priceRange
+    );
+    related = [...related, ...priceRangeProducts.slice(0, 4 - related.length)];
+  }
+
+  // 4. Final fallback - popular products
+  if (related.length < 4) {
+    const popularProducts = [...trendingProducts, ...specialOffers]
+      .filter(p => 
+        p.id !== productId &&
+        !related.some(r => r.id === p.id)
+      )
+      .slice(0, 4 - related.length);
+    related = [...related, ...popularProducts];
+  }
+
+  // Ensure we don't show duplicates and maintain order
+  const uniqueRelated = [];
+  const seenIds = new Set();
+  
+  for (const product of related) {
+    if (!seenIds.has(product.id)) {
+      seenIds.add(product.id);
+      uniqueRelated.push(product);
+    }
+    if (uniqueRelated.length >= 4) break;
+  }
+
+  return uniqueRelated;
 };
