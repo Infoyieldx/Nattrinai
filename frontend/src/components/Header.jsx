@@ -110,16 +110,6 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
                 }`}
               />
             </Link>
-          {/* Logo */}
-          <Link to="/" onClick={handleClick}>
-            <img
-              src={logo}
-              alt="Logo"
-              className={`h-[64px] w-[130px] mr-2 cursor-pointer transition-transform ${
-                animate ? 'animate-coinFlip' : ''
-              }`}
-            />
-          </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
@@ -188,8 +178,8 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
               <i className="fas fa-bars text-xl w-10"></i>
             </button>
           </div>
-        </div> {/* closes flex items-center justify-between */}
-      </div> {/* closes w-full wrapper */}
+        </div>
+      </div>
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
