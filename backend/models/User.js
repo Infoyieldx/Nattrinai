@@ -27,12 +27,14 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    otp: String,
-    otpExpiry: Date,
-
-    // ✅ Add these for Forgot Password
-    resetToken: String,
-    resetTokenExpires: Date,
+    otp: {
+      type: String,
+      default: null,
+    },
+    otpExpiry: {
+      type: Date,
+      default: null,
+    },
   },
   {
     timestamps: true,
