@@ -111,7 +111,7 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-8 text-lg">
             <Link to="/" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline">Home</Link>
             <Link to="/products" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline">Products</Link>
             <Link to="/about" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline">About</Link>
@@ -119,32 +119,36 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
           </div>
 
           {/* Search Bar */}
-          <div className="hidden md:flex items-center flex-1 max-w-md mx-8" ref={searchRef}>
-            <div className="relative w-full">
-              <form onSubmit={handleSearchSubmit} className="relative">
-                <input
-                  type="text"
-                  placeholder="Search products, categories..."
-                  value={searchQuery}
-                  onChange={handleSearchInput}
-                  onFocus={() => searchQuery.trim() && setShowSuggestions(true)}
-                  className="w-full pl-10 pr-4 py-2 border border-[#A6A37E] rounded-full focus:outline-none focus:ring-2 focus:ring-[#4A5A2A] text-sm hover:border-[#4A5A2A] hover:bg-[#f5f5f0] transition"
-                />
-                <i className="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-[#A6A37E] text-sm"></i>
-              </form>
-              {showSuggestions && (
-                <SearchSuggestions
-                  suggestions={searchSuggestions}
-                  onSuggestionClick={handleSuggestionClick}
-                />
-              )}
-            </div>
-          </div>
+         <div
+                className="w-full max-w-[600px] flex flex-col md:flex-row items-center flex-1 mx-2  md:mx-8"
+                ref={searchRef}
+              >
+                <div className="relative w-full">
+                  <form onSubmit={handleSearchSubmit} className="relative">
+                    <input
+                      type="text"
+                      placeholder="Search products, categories..."
+                      value={searchQuery}
+                      onChange={handleSearchInput}
+                      onFocus={() => searchQuery.trim() && setShowSuggestions(true)}
+                      className="w-full pl-10 pr-4 py-2 border border-[#A6A37E] rounded-full focus:outline-none focus:ring-2 focus:ring-[#4A5A2A] text-sm hover:border-[#4A5A2A] hover:bg-[#f5f5f0] transition placeholder:text-xs sm:placeholder:text-sm"
+                    />
+                    <i className="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-[#A6A37E] text-xs sm:text-sm"></i>
+                  </form>
+                  {showSuggestions && (
+                    <SearchSuggestions
+                      suggestions={searchSuggestions}
+                      onSuggestionClick={handleSuggestionClick}
+                    />
+                  )}
+                </div>
+              </div>
+
 
           {/* Right Icons */}
-          <div className="flex items-center space-x-7">
+          <div className="flex items-center space-x-7  ">
             <Link to="/wishlist">
-              <div className="relative cursor-pointer">
+              <div className="relative cursor-pointer hidden md:flex max-w-md">
                 <i className="fas fa-heart text-[#4A5A2A] text-xl hover:scale-125 transition-transform"></i>
                 {wishlistCount > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -154,7 +158,7 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
               </div>
             </Link>
 
-            <button onClick={() => setShowCart(true)} className="relative cursor-pointer">
+            <button onClick={() => setShowCart(true)} className="relative cursor-pointer hidden md:flex max-w-md">
               <i className="fas fa-shopping-cart text-[#4A5A2A] text-xl hover:scale-125 transition-transform"></i>
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -211,6 +215,26 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
             >
               Contact
             </Link>
+            <Link
+              to="/wishlist"
+              className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Wishlist
+            </Link>
+             <button onClick={() =>{ 
+             setShowCart(true)
+             setMobileMenuOpen(false)
+             }}
+             className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]">
+              MyCart
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+              
+            </button>
           </div>
         </div>
       )}

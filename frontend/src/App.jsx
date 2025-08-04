@@ -1,11 +1,9 @@
-// App.jsx (FIXED)
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Router, useLocation } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { useState } from "react";
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from "react";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -20,13 +18,38 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 import Auth from "./pages/Auth.jsx";
-import ForgotPassword  from  "./pages/Forgotpassword.jsx";
+import ForgotPassword from "./pages/Forgotpassword.jsx";
 import AdminDashboard from "./admin/AdminDashboard.jsx";
-
-
-import DryFruitsCombos from './components/DryFruitsCombos';
+import LogoLoader from "./components/LogoLoader";
+import ScrollToTop from "./components/ScrollTop.jsx";
+// import { BrowserRouter as Router ,Routes ,Route } from "react-router-dom";
 
 function MainRouter() {
+  const location = useLocation();
+  const path = location.pathname;
+  const isAdminRoute = path.startsWith("/admin");
+
+  const [loading, setLoading] = useState(true);
+
+   useEffect(() => {
+    const handleLoad = () => {
+      setLoading(false);
+    };
+
+    if (document.readyState === "complete") {
+      // If page already loaded (fast connection)
+      setLoading(false);
+    } else {
+      // Wait for full load (images, fonts, etc.)
+      window.addEventListener("load", handleLoad);
+    }
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+    };
+  }, []);
+
+  // Shared state and handlers
   const [cartItems, setCartItems] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
@@ -112,10 +135,6 @@ function MainRouter() {
     setCartCount(0);
     setCheckoutStep(4);
   };
-   const location = useLocation();
-const path = location.pathname;
-const isAdminRoute = path.startsWith("/admin");
-
 
   const sharedProps = {
     cartItems,
@@ -145,10 +164,14 @@ const isAdminRoute = path.startsWith("/admin");
     handlePlaceOrder,
   };
 
-  return (
+  return loading ? (
+    <LogoLoader />
+  ) : (
     <div className="min-h-screen bg-[#EEECE5]">
-       {!isAdminRoute && <Header {...sharedProps} />}
-      <Routes>
+      {!isAdminRoute && <Header {...sharedProps} />}
+      
+        <ScrollToTop />
+       <Routes>
         <Route path="/" element={<Home {...sharedProps} />} />
         <Route path="/products" element={<Products {...sharedProps} />} />
         <Route path="/category/:categoryName" element={<Category {...sharedProps} />} />
@@ -159,14 +182,13 @@ const isAdminRoute = path.startsWith("/admin");
         <Route path="/contact" element={<Contact />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-
         <Route path="/profile" element={<Profile />} />
-        <Route path="admin" element={<AdminDashboard />} />
-        
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
+     
+  
       {!isAdminRoute && <Footer />}
       <ShoppingCart {...sharedProps} />
-      
     </div>
   );
 }

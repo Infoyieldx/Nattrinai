@@ -60,12 +60,7 @@ const TrendingProducts = ({ handleAddToCart, handleWishlistToggle, wishlistItems
                 </div>
               </div>
               
-              <div className="h-1 bg-gray-200 rounded-full mt-4 mx-4 overflow-hidden">
-                <div 
-                  className="h-full bg-[#4A5A2A] rounded-full" 
-                  style={{ width: `${100 / products.length * Math.min(4, products.length)}%` }}
-                ></div>
-              </div>
+              
             </div>
           </div>
         ))}
