@@ -22,6 +22,9 @@ import ForgotPassword from "./pages/Forgotpassword.jsx";
 import AdminDashboard from "./admin/AdminDashboard.jsx";
 import LogoLoader from "./components/LogoLoader";
 import ScrollToTop from "./components/ScrollTop.jsx";
+import Payment from './components/Payment';
+import Success from './components/success.jsx';
+import Failure from './components/failure';
 // import { BrowserRouter as Router ,Routes ,Route } from "react-router-dom";
 
 function MainRouter() {
@@ -91,6 +94,10 @@ function MainRouter() {
       setCartCount((prev) => prev - item.quantity);
     }
   };
+  const clearCart = () => {
+    setCartItems([]); // Clears all cart items
+  };
+
 
   const handleUpdateQuantity = (productId, newQuantity) => {
     if (newQuantity <= 0) {
@@ -136,6 +143,7 @@ function MainRouter() {
     setCheckoutStep(4);
   };
 
+
   const sharedProps = {
     cartItems,
     wishlistItems,
@@ -169,9 +177,7 @@ function MainRouter() {
   ) : (
     <div className="min-h-screen bg-[#EEECE5]">
       {!isAdminRoute && <Header {...sharedProps} />}
-      
-        <ScrollToTop />
-       <Routes>
+      <Routes>
         <Route path="/" element={<Home {...sharedProps} />} />
         <Route path="/products" element={<Products {...sharedProps} />} />
         <Route path="/category/:categoryName" element={<Category {...sharedProps} />} />
@@ -183,7 +189,12 @@ function MainRouter() {
         <Route path="/auth" element={<Auth />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="admin" element={<AdminDashboard />} />
+        <Route path="/payment" element={<Payment clearCart={clearCart} />} />
+        <Route path="/success" element={<Success clearCart={clearCart} />} />
+        <Route path="/failure" element={<Failure />} />
         <Route path="/admin" element={<AdminDashboard />} />
+
       </Routes>
      
   
