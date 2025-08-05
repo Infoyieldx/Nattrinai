@@ -11,8 +11,8 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const searchRef = useRef(null);
-
   const [animate, setAnimate] = useState(false);
+
   const handleClick = () => {
     setAnimate(false);
     setTimeout(() => setAnimate(true), 10);
@@ -99,24 +99,27 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="w-full mx-auto sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[80px]">
-          {/* Logo */}
-          <Link to="/" onClick={handleClick}>
-            <img
-              src={logo}
-              alt="Logo"
-              className={`h-[64px] w-[130px] mr-2 cursor-pointer transition-transform ${
-                animate ? 'animate-coinFlip' : ''
-              }`}
-            />
-          </Link>
+          {/* Left Section: Logo & Desktop Nav */}
+          <div className="flex items-center">
+            <Link to="/" onClick={handleClick}>
+              <img
+                src={logo}
+                alt="Logo"
+                className={`h-[64px] w-[130px] mr-2 cursor-pointer transition-transform ${
+                  animate ? 'animate-coinFlip' : ''
+                }`}
+              />
+            </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8 text-lg">
+          <div className="hidden md:flex items-center space-x-8 text-lg mx-10">
             <Link to="/" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline">Home</Link>
             <Link to="/products" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline">Products</Link>
             <Link to="/about" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline">About</Link>
             <Link to="/contact" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline">Contact</Link>
           </div>
+          </div>
+          
 
           {/* Search Bar */}
          <div
