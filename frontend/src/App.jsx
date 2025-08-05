@@ -20,9 +20,11 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 import Auth from "./pages/Auth.jsx";
-import ForgotPassword  from  "./pages/Forgotpassword.jsx";
+import ForgotPassword from "./pages/Forgotpassword.jsx";
 import AdminDashboard from "./admin/AdminDashboard.jsx";
-
+import Payment from './components/Payment';
+import Success from './components/success.jsx';
+import Failure from './components/failure';
 
 import DryFruitsCombos from './components/DryFruitsCombos';
 
@@ -68,6 +70,10 @@ function MainRouter() {
       setCartCount((prev) => prev - item.quantity);
     }
   };
+  const clearCart = () => {
+    setCartItems([]); // Clears all cart items
+  };
+
 
   const handleUpdateQuantity = (productId, newQuantity) => {
     if (newQuantity <= 0) {
@@ -112,9 +118,9 @@ function MainRouter() {
     setCartCount(0);
     setCheckoutStep(4);
   };
-   const location = useLocation();
-const path = location.pathname;
-const isAdminRoute = path.startsWith("/admin");
+  const location = useLocation();
+  const path = location.pathname;
+  const isAdminRoute = path.startsWith("/admin");
 
 
   const sharedProps = {
@@ -147,7 +153,7 @@ const isAdminRoute = path.startsWith("/admin");
 
   return (
     <div className="min-h-screen bg-[#EEECE5]">
-       {!isAdminRoute && <Header {...sharedProps} />}
+      {!isAdminRoute && <Header {...sharedProps} />}
       <Routes>
         <Route path="/" element={<Home {...sharedProps} />} />
         <Route path="/products" element={<Products {...sharedProps} />} />
@@ -162,11 +168,14 @@ const isAdminRoute = path.startsWith("/admin");
 
         <Route path="/profile" element={<Profile />} />
         <Route path="admin" element={<AdminDashboard />} />
-        
+        <Route path="/payment" element={<Payment clearCart={clearCart} />} />
+        <Route path="/success" element={<Success clearCart={clearCart} />} />
+        <Route path="/failure" element={<Failure />} />
+
       </Routes>
       {!isAdminRoute && <Footer />}
       <ShoppingCart {...sharedProps} />
-      
+
     </div>
   );
 }
