@@ -13,6 +13,7 @@ const Profile = () => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
+
     navigate("/");
   };
 
@@ -31,11 +32,31 @@ const Profile = () => {
               <button
                 onClick={handleLogout}
                 className="mt-3 px-4 py-2 bg-[#4A5A2A] text-white rounded text-sm"
+=======
+    navigate("/login");
+  };
+
+  return (
+    <div className="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {user ? (
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="bg-[#4A5A2A] text-white p-8 flex items-center space-x-6">
+            <div className="w-24 h-24 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+              <i className="fas fa-user text-4xl"></i>
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold mb-2">Welcome, {user.name || "User"}</h1>
+              <p className="text-green-100">{user.email}</p>
+              <button
+                onClick={handleLogout}
+                className="mt-4 px-4 py-2 bg-white text-[#4A5A2A] font-semibold rounded"
+
               >
                 Logout
               </button>
             </div>
           </div>
+
 
           {/* Quick Links Grid */}
           <div className="grid grid-cols-2 gap-4 mt-8">
@@ -70,6 +91,9 @@ const Profile = () => {
             </div>
           )}
         </>
+
+        </div>
+
       ) : (
         <div className="text-center mt-20">
           <h2 className="text-2xl font-semibold mb-4">You are not logged in</h2>

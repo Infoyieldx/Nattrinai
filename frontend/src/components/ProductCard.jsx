@@ -1,25 +1,25 @@
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard = ({ product, onAddToCart, onWishlistToggle, isInWishlist, showBuyNow = false }) => {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
 
   const handleProductClick = () => {
-    setLocation(`/product/${product.id}`);
+    navigate(`/product/${product.id}`);
   };
 
   const handleBuyNow = () => {
     onAddToCart(product);
-    setLocation('/checkout');
+    navigate('/checkout');
   };
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
       <div className="relative">
-        <div className="aspect-square overflow-hidden cursor-pointer" onClick={handleProductClick}>
+        <div className="aspect-square overflow-hidden cursor-pointer " onClick={handleProductClick}>
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-cover object-top hover:scale-125 transition-transform"
           />
         </div>
         {product.discount && (
@@ -35,7 +35,7 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle, isInWishlist, sho
         </button>
       </div>
       <div className="p-4">
-        <h3 className="font-semibold text-[#3D3F24] mb-2 cursor-pointer" onClick={handleProductClick}>
+        <h3 className="font-semibold text-[#3D3F24] mb-2 cursor-pointer line-clamp-2 h-11" onClick={handleProductClick}>
           {product.name}
         </h3>
         <div className="flex items-center mb-3">
@@ -45,16 +45,16 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle, isInWishlist, sho
           )}
         </div>
         {showBuyNow ? (
-          <div className="flex space-x-2">
+          <div className="flex space-x-2 ">
             <button
               onClick={() => onAddToCart(product)}
-              className="flex-1 bg-[#4A5A2A] text-white py-2 rounded-lg font-semibold hover:bg-[#3D3F24] transition-colors whitespace-nowrap cursor-pointer"
+              className="flex-1 bg-[#4A5A2A] text-[10px] text-white py-2 rounded-lg p-1 font-semibold hover:bg-[#3D3F24] transition-colors whitespace-nowrap cursor-pointer"
             >
               Add to Cart
             </button>
             <button
               onClick={handleBuyNow}
-              className="flex-1 bg-orange-500 text-white py-2 rounded-lg font-semibold hover:bg-orange-600 transition-colors whitespace-nowrap cursor-pointer"
+              className="flex-1 bg-orange-500 text-[10px] text-white py-2 rounded-lg font-semibold hover:bg-orange-600 transition-colors whitespace-nowrap cursor-pointer"
             >
               Buy Now
             </button>
