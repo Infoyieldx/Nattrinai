@@ -73,22 +73,40 @@ const promoCodes = [
 
 export default function PromoCodeManager() {
   const [open, setOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    code: "",
+    discountType: "percentage",
+    discountValue: "",
+    maxUses: "",
+    expiryDate: ""
+  });
 
   const getStatusColor = (status) => {
     switch (status) {
       case "active":
-        return "bg-success/10 text-success border-success/20";
+        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
       case "expired":
-        return "bg-destructive/10 text-destructive border-destructive/20";
+        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200";
       case "disabled":
-        return "bg-muted text-muted-foreground border-border";
+        return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300";
       default:
-        return "bg-muted text-muted-foreground border-border";
+        return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300";
     }
+  };
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({ ...prev, [id]: value }));
+  };
+
+  const handleSelectChange = (value) => {
+    setFormData(prev => ({ ...prev, discountType: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Here you would typically call an API to create the promo code
+    console.log("Creating promo code:", formData);
     setOpen(false);
   };
 
@@ -96,7 +114,7 @@ export default function PromoCodeManager() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h3 className="text-2xl font-bold text-foreground">Promo Codes</h3>
+          <h3 className="text-2xl font-bold">Promo Codes</h3>
           <p className="text-muted-foreground">Manage discount codes and promotions</p>
         </div>
         <Dialog open={open} onOpenChange={setOpen}>
@@ -106,20 +124,29 @@ export default function PromoCodeManager() {
               Create Promo Code
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
               <DialogTitle>Create New Promo Code</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="promoCode">Promo Code</Label>
-                <Input id="promoCode" placeholder="Enter promo code" required />
+                <Label htmlFor="code">Promo Code</Label>
+                <Input 
+                  id="code" 
+                  value={formData.code}
+                  onChange={handleChange}
+                  placeholder="Enter promo code" 
+                  required 
+                />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="discountType">Discount Type</Label>
-                  <Select>
+                  <Select 
+                    value={formData.discountType}
+                    onValueChange={handleSelectChange}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select type" />
                     </SelectTrigger>
@@ -131,23 +158,45 @@ export default function PromoCodeManager() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="discountValue">Discount Value</Label>
-                  <Input id="discountValue" type="number" placeholder="0" required />
+                  <Input 
+                    id="discountValue" 
+                    type="number" 
+                    value={formData.discountValue}
+                    onChange={handleChange}
+                    placeholder="0" 
+                    required 
+                  />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="maxUses">Max Uses</Label>
-                  <Input id="maxUses" type="number" placeholder="100" />
+                  <Input 
+                    id="maxUses" 
+                    type="number" 
+                    value={formData.maxUses}
+                    onChange={handleChange}
+                    placeholder="100" 
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="expiryDate">Expiry Date</Label>
-                  <Input id="expiryDate" type="date" />
+                  <Input 
+                    id="expiryDate" 
+                    type="date" 
+                    value={formData.expiryDate}
+                    onChange={handleChange}
+                  />
                 </div>
               </div>
 
               <div className="flex justify-end space-x-2 pt-4">
-                <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  onClick={() => setOpen(false)}
+                >
                   Cancel
                 </Button>
                 <Button type="submit">Create Promo Code</Button>
@@ -160,13 +209,15 @@ export default function PromoCodeManager() {
       <div className="grid gap-6 md:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
+            <CardTitle className="text-sm font-medium">
               Active Codes
             </CardTitle>
-            <Percent className="h-4 w-4 text-primary" />
+            <Percent className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-foreground">12</div>
+            <div className="text-2xl font-bold">
+              {promoCodes.filter(p => p.status === 'active').length}
+            </div>
             <p className="text-xs text-muted-foreground">
               Currently available
             </p>
@@ -175,28 +226,30 @@ export default function PromoCodeManager() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
+            <CardTitle className="text-sm font-medium">
               Total Uses
             </CardTitle>
-            <Upload className="h-4 w-4 text-success" />
+            <Upload className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-foreground">1,456</div>
+            <div className="text-2xl font-bold">
+              {promoCodes.reduce((sum, promo) => sum + promo.uses, 0)}
+            </div>
             <p className="text-xs text-muted-foreground">
-              This month
+              All time
             </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
+            <CardTitle className="text-sm font-medium">
               Savings Given
             </CardTitle>
-            <Calendar className="h-4 w-4 text-warning" />
+            <Calendar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-foreground">$8,234</div>
+            <div className="text-2xl font-bold">$8,234</div>
             <p className="text-xs text-muted-foreground">
               Total discounts
             </p>
@@ -228,10 +281,12 @@ export default function PromoCodeManager() {
                   <TableCell>
                     <div className="text-sm">
                       {promo.uses} / {promo.maxUses}
-                      <div className="w-full bg-muted rounded-full h-1.5 mt-1">
+                      <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1">
                         <div 
-                          className="bg-primary h-1.5 rounded-full" 
-                          style={{ width: `${(promo.uses / promo.maxUses) * 100}%` }}
+                          className="bg-blue-600 h-1.5 rounded-full" 
+                          style={{ 
+                            width: `${Math.min(100, (promo.uses / promo.maxUses) * 100)}%` 
+                          }}
                         />
                       </div>
                     </div>
@@ -248,7 +303,7 @@ export default function PromoCodeManager() {
                         Edit
                       </Button>
                       <Button variant="outline" size="sm">
-                        Disable
+                        {promo.status === 'active' ? 'Disable' : 'Enable'}
                       </Button>
                     </div>
                   </TableCell>
