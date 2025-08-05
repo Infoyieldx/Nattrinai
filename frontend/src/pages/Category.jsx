@@ -95,7 +95,7 @@ const Category = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
               <p className="text-gray-500 text-lg">No products found in this category</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
               {products.map((product) => (
                 <ProductCard
                   key={product.id}
