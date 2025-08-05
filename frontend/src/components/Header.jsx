@@ -202,7 +202,7 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
               className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Products
+              Products 
             </Link>
             <Link
               to="/about"
