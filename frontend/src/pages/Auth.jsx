@@ -126,7 +126,7 @@ const Auth = () => {
      JSX
   ───────────────────────────── */
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f6f7f2] px-4">
+    <div className=" my-190px sm:my-[140px]  flex items-center justify-center px-4">
       <form
         onSubmit={isLogin ? handleLogin : (e) => e.preventDefault()}
         className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md"
