@@ -23,7 +23,7 @@ const ProductDetail = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
   useEffect(() => {
     window.scrollTo(0, 0);
     setIsLoading(true);
-    
+
     const prod = getProductById(String(productId));
     setProduct(prod);
     setQuantity(1);
@@ -54,26 +54,19 @@ const ProductDetail = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
   if (isLoading) {
     return (
       <div className="py-16 w-full px-4 sm:px-6 lg:px-12 xl:px-16 2xl:px-24">
+        {/* Skeleton loader */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           <div className="animate-pulse">
             <div className="w-full h-96 lg:h-[500px] bg-gray-200 rounded-2xl"></div>
           </div>
           <div className="space-y-6">
-            <div className="animate-pulse">
-              <div className="h-10 bg-gray-200 rounded w-3/4"></div>
-              <div className="mt-4 h-4 bg-gray-200 rounded w-full"></div>
-              <div className="mt-2 h-4 bg-gray-200 rounded w-5/6"></div>
-            </div>
-            <div className="animate-pulse">
-              <div className="h-8 bg-gray-200 rounded w-1/4"></div>
-            </div>
-            <div className="animate-pulse">
-              <div className="h-12 bg-gray-200 rounded w-1/2"></div>
-            </div>
-            <div className="animate-pulse">
-              <div className="h-12 bg-gray-200 rounded"></div>
-              <div className="mt-4 h-12 bg-gray-200 rounded"></div>
-            </div>
+            <div className="animate-pulse h-10 bg-gray-200 rounded w-3/4"></div>
+            <div className="animate-pulse h-4 bg-gray-200 rounded w-full mt-4"></div>
+            <div className="animate-pulse h-4 bg-gray-200 rounded w-5/6 mt-2"></div>
+            <div className="animate-pulse h-8 bg-gray-200 rounded w-1/4 mt-4"></div>
+            <div className="animate-pulse h-12 bg-gray-200 rounded w-1/2 mt-4"></div>
+            <div className="animate-pulse h-12 bg-gray-200 rounded mt-4"></div>
+            <div className="animate-pulse h-12 bg-gray-200 rounded mt-4"></div>
           </div>
         </div>
       </div>
@@ -90,7 +83,10 @@ const ProductDetail = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
   }
 
   return (
-    <div className="py-16 w-full px-4 sm:px-6 lg:px-12 xl:px-16 2xl:px-24">
+    <div
+      className="py-16 w-full px-4 sm:px-6 lg:px-12 xl:px-16 2xl:px-24"
+      key={product.id} // 👈 THIS LINE FORCES COMPONENT TO RE-RENDER ON PRODUCT CHANGE
+    >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <div>
           <div className="relative">
