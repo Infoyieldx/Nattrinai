@@ -1,13 +1,11 @@
-import { useLocation } from "wouter";
-import ProductCard from "./ProductCard";
+import { useNavigate } from "react-router-dom";
 import { dryFruitsCombos } from "../data/products";
 
 const DryFruitsCombos = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
-  const [, navigate] = useLocation();
+  const navigate = useNavigate();
 
   const handleNavigate = (productId) => {
-    // Force navigation even if same URL
-    navigate(`/product/${productId}`, { replace: false });
+    navigate(`/product/${productId}`);
   };
 
   return (
