@@ -25,6 +25,15 @@ import ScrollToTop from "./components/ScrollTop.jsx";
 import Payment from './components/Payment';
 import Success from './components/success.jsx';
 import Failure from './components/failure';
+import YourOrders from "./pages/YourOrders";
+import OrderTracking from "./pages/OrderTracking";
+import RecentlyViewed from "./pages/RecentlyViewed"; // <-- Import it
+import ManagingAddress from "./pages/ManagingAddress";
+import AccountSettings from "./pages/AccountSettings";
+import HelpSupport from "./pages/HelpSupport";
+import Returns from "./pages/Returns";
+import Offers from "./pages/Offers.jsx";
+
 // import { BrowserRouter as Router ,Routes ,Route } from "react-router-dom";
 
 function MainRouter() {
@@ -196,6 +205,15 @@ function MainRouter() {
         <Route path="/success" element={<Success clearCart={clearCart} />} />
         <Route path="/failure" element={<Failure />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/YourOrders" element={<YourOrders/>}/>
+        <Route path="/track-order" element={<OrderTracking />} />
+        <Route path="/recently-viewed" element={<RecentlyViewed />} /> {/* <-- This */}
+        <Route path="/address" element={<ManagingAddress />} />
+        <Route path="/settings" element={<AccountSettings />} />
+        <Route path="/support" element={<HelpSupport />} />
+        <Route path="/returns" element={<Returns />} />
+        <Route path="/offers" element={<Offers />} />
+
 
       </Routes>
      

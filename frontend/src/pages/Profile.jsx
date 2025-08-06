@@ -39,7 +39,7 @@ const Profile = () => {
 
           {/* Quick Links Grid */}
           <div className="grid grid-cols-2 gap-4 mt-8">
-            <Link to="/orders" className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center hover:shadow-lg">
+            <Link to="/YourOrders" className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center hover:shadow-lg">
               <i className="fas fa-box text-2xl mb-2 text-[#4A5A2A]"></i>
               <span>Your Orders</span>
             </Link>
