@@ -54,7 +54,6 @@ const ProductDetail = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
   if (isLoading) {
     return (
       <div className="py-16 w-full px-4 sm:px-6 lg:px-12 xl:px-16 2xl:px-24">
-        {/* Skeleton loader */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           <div className="animate-pulse">
             <div className="w-full h-96 lg:h-[500px] bg-gray-200 rounded-2xl"></div>
@@ -82,11 +81,12 @@ const ProductDetail = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
     );
   }
 
+  const averageRating = reviews.length > 0
+    ? (reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length).toFixed(1)
+    : null;
+
   return (
-    <div
-      className="py-16 w-full px-4 sm:px-6 lg:px-12 xl:px-16 2xl:px-24"
-      key={product.id} // 👈 THIS LINE FORCES COMPONENT TO RE-RENDER ON PRODUCT CHANGE
-    >
+    <div className="py-16 w-full px-4 sm:px-6 lg:px-12 xl:px-16 2xl:px-24" key={product.id}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <div>
           <div className="relative">
@@ -107,7 +107,20 @@ const ProductDetail = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
         <div className="space-y-6">
           <div>
             <h1 className="text-4xl font-bold text-[#3D3F24]">{product.name}</h1>
-            <p className="text-gray-600 mt-2">{product.description}</p>
+
+            {reviews.length > 0 && (
+              <div className="mt-2 flex items-center space-x-2">
+                <span className="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  {averageRating} ★
+
+                </span>
+                <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                  {reviews.length} Ratings & Reviews
+                </span>
+              </div>
+            )}
+
+            <p className="text-gray-600 mt-4">{product.description}</p>
           </div>
 
           <div className="flex items-center space-x-4">
