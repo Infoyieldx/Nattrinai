@@ -177,6 +177,8 @@ function MainRouter() {
   ) : (
     <div className="min-h-screen bg-[#EEECE5]">
       {!isAdminRoute && <Header {...sharedProps} />}
+
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home {...sharedProps} />} />
         <Route path="/products" element={<Products {...sharedProps} />} />
