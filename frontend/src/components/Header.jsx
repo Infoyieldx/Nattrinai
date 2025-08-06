@@ -201,7 +201,7 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
           </div>
         </div>
       </div>
-
+</div>
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-white border-t">
