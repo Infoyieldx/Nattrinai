@@ -98,6 +98,21 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="w-full mx-auto sm:px-6 lg:px-8">
+
+       <div className="flex items-center justify-between h-16">
+        <div
+  onClick={handleClick}
+  className={`h-[70px] w-[70px] rounded-full overflow-hidden border-2 border-[#4A5A2A] shadow-md mr-4 cursor-pointer transition-transform ${
+    animate ? "animate-coinFlip" : ""
+  }`}
+>
+  <img
+    src={logo}
+    alt="Logo"
+    className="h-full w-full object-cover"
+  />
+</div>
+
         <div className="flex items-center justify-between h-[80px]">
           {/* Left Section: Logo & Desktop Nav */}
           <div className="flex items-center">
@@ -110,6 +125,7 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
                 }`}
               />
             </Link>
+
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8 text-lg mx-10">
