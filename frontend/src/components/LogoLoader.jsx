@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/logo.jpg'; // Change to your logo path
+import logo from '../assets/logo.png'; // Change to your logo path
 
 const LogoLoader = () => {
   return (
