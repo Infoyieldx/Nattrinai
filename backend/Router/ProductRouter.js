@@ -1,13 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const Product = require("../Models/ProductModel")
-const Category = require("../models/Category")
-const PromoCode = require("../Models/PromoCodeModel");
+const Product = require("../Models/ProductModel");
+const Category = require("../models/Category");
+const PromoCode = require("../models/PromoCodeModel");
 const imageUpload = require("../Helpers/Multer");
 // Create Product
 router.post("/", imageUpload(), async (req, res) => {
   try {
-    const { productId, productName, category, price, description ,stock} = req.body;
+    const { productId, productName, category, price, description, stock } = req.body;
+
+    // Validate required fields
+    if (!productId || !productName || !category || !price || !description || !stock) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
 
     const categoryExists = await Category.findById(category);
     if (!categoryExists) {
@@ -18,7 +23,8 @@ router.post("/", imageUpload(), async (req, res) => {
       return res.status(400).json({ error: "Image file is required" });
     }
 
-    const imageUrl = `http://localhost:5000/api/products/uploads/${req.file.filename}`;
+    // Use dynamic protocol/host for imageUrl
+    const imageUrl = `${req.protocol}://${req.get("host")}/api/products/uploads/${req.file.filename}`;
 
     const product = new Product({
       productId,
@@ -33,7 +39,7 @@ router.post("/", imageUpload(), async (req, res) => {
     const savedProduct = await product.save();
     res.status(201).json(savedProduct);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 

@@ -3,6 +3,7 @@ import axios from "axios";
 
 const CategoryManager = () => {
   const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -13,13 +14,24 @@ const CategoryManager = () => {
   });
   const [image, setImage] = useState(null); // 🆕 image state
 
-  // Fetch categories
+
+// Fetch categories
 useEffect(() => {
   axios.get("http://localhost:5000/api/categories")
-    .then((res) => setCategories(res.data ?? [])) // fallback to empty array
+    .then((res) => setCategories(res.data ?? []))
     .catch((err) => {
       console.error("Failed to fetch categories", err);
-      setCategories([]); // fallback on error
+      setCategories([]);
+    });
+}, []);
+
+// Fetch products
+useEffect(() => {
+  axios.get("http://localhost:5000/api/products")
+    .then((res) => setProducts(res.data ?? []))
+    .catch((err) => {
+      console.error("Failed to fetch products", err);
+      setProducts([]);
     });
 }, []);
 
@@ -66,7 +78,7 @@ useEffect(() => {
 
   const totalCategories = categories.length;
   const activeCategories = categories.filter((c) => c.status === "active").length;
-  const totalProducts = categories.reduce((sum, category) => sum + (category.productCount || 0), 0);
+  const totalProducts = products.length;
 
   return (
     <div className="space-y-6 p-4">
