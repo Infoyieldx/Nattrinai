@@ -1,227 +1,204 @@
-
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";  // Changed from "./components/ui/dialog"
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+import { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import axios from "axios";
 
-export default function AddProductDialog({ onProductAdded }) {
+export default function AddProductDialog() {
   const [open, setOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
+
+  const generateProductId = () => `PROD-${Date.now()}`;
+
+  const initialFormState = () => ({
+    productId: generateProductId(),
+    productName: "",
     category: "",
     price: "",
     stock: "",
-    barcode: "",
     description: "",
+    image: null,
   });
 
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData((prev) => ({ ...prev, [id]: value }));
-  };
+  const [formData, setFormData] = useState(initialFormState);
 
-  const handleSelectChange = (value) => {
-    setFormData((prev) => ({ ...prev, category: value }));
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  // Fetch categories on load
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:5000/api/categories");
+        setCategories(data);
+      } catch (err) {
+        console.error(err);
+        alert("Error fetching categories: " + err.message);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === "image") {
+      setFormData((prev) => ({ ...prev, image: files[0] }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
     try {
-      // API call to your Node.js backend
-      const response = await fetch('/api/products', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+      const data = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        if (value) data.append(key, value);
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to add product');
-      }
+      await axios.post("http://localhost:5000/api/products", data);
 
-      const result = await response.json();
-      console.log("Product added:", result);
-
-      // Reset form and close dialog
-      setFormData({
-        name: "",
-        category: "",
-        price: "",
-        stock: "",
-        barcode: "",
-        description: "",
-      });
-      
+      setFormData(initialFormState());
       setOpen(false);
-      
-      // Notify parent component
-      if (onProductAdded) {
-        onProductAdded(result);
-      }
-
     } catch (error) {
-      console.error("Error adding product:", error);
+      console.error("Error:", error);
       alert("Failed to add product: " + error.message);
     } finally {
       setIsLoading(false);
     }
   };
 
+  const openDialog = () => {
+    setFormData(initialFormState()); // generate new productId
+    setOpen(true);
+  };
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button className="bg-primary hover:bg-primary/90">
-          <Plus className="h-4 w-4 mr-2" />
-          Add Product
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="max-w-2xl z-50">
-        <DialogHeader>
-          <DialogTitle>Add New Product</DialogTitle>
-        </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">Product Name*</Label>
-              <Input
-                id="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Enter product name"
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="category">Category*</Label>
-              <Select
-                onValueChange={handleSelectChange}
-                value={formData.category}
-                required
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="fruits">Fruits</SelectItem>
-                  <SelectItem value="vegetables">Vegetables</SelectItem>
-                  <SelectItem value="dairy">Dairy</SelectItem>
-                  <SelectItem value="bakery">Bakery</SelectItem>
-                  <SelectItem value="meat">Meat & Seafood</SelectItem>
-                  <SelectItem value="beverages">Beverages</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
+    <>
+      <button
+        onClick={openDialog}
+        className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+      >
+        <Plus className="w-4 h-4" />
+        Add Product
+      </button>
 
-          <div className="grid grid-cols-3 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="price">Price*</Label>
-              <Input
-                id="price"
-                type="number"
-                step="0.01"
-                min="0"
-                value={formData.price}
-                onChange={handleChange}
-                placeholder="0.00"
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="stock">Stock Quantity*</Label>
-              <Input
-                id="stock"
-                type="number"
-                min="0"
-                value={formData.stock}
-                onChange={handleChange}
-                placeholder="0"
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="barcode">Barcode</Label>
-              <Input
-                id="barcode"
-                value={formData.barcode}
-                onChange={handleChange}
-                placeholder="Product barcode"
-              />
-            </div>
-          </div>
+      {open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg w-[95%] sm:w-full max-w-2xl p-4 sm:p-6 shadow-lg relative overflow-y-auto max-h-[90vh]">
+            <h2 className="text-xl font-semibold mb-4">Add Product</h2>
 
-          <div className="space-y-2">
-            <Label htmlFor="description">Description</Label>
-            <Textarea
-              id="description"
-              value={formData.description}
-              onChange={handleChange}
-              placeholder="Product description"
-              rows={3}
-            />
-          </div>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  name="productId"
+                  value={formData.productId}
+                  className="border rounded px-3 py-2 w-full"
+                  readOnly
+                />
+                <input
+                  type="text"
+                  name="productName"
+                  placeholder="Product Name"
+                  value={formData.productName}
+                  onChange={handleChange}
+                  className="border rounded px-3 py-2 w-full"
+                  required
+                />
+              </div>
 
-          <div className="flex justify-end space-x-2 pt-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setOpen(false)}
-              disabled={isLoading}
-            >
-              Cancel
-            </Button>
-            <Button type="submit" disabled={isLoading}>
-              {isLoading ? (
-                <>
-                  <svg
-                    className="animate-spin -ml-1 mr-2 h-4 w-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    ></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    ></path>
-                  </svg>
-                  Adding...
-                </>
-              ) : (
-                "Add Product"
-              )}
-            </Button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <select
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  className="border rounded px-3 py-2 w-full"
+                  required
+                >
+                  <option value="">Select Category</option>
+                  {categories.map((cat) => (
+                    <option key={cat._id} value={cat._id}>
+                      {cat.name}
+                    </option>
+                  ))}
+                </select>
+
+                <input
+                  type="number"
+                  name="price"
+                  placeholder="Price"
+                  value={formData.price}
+                  onChange={handleChange}
+                  className="border rounded px-3 py-2 w-full"
+                  required
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <input
+                  type="number"
+                  name="stock"
+                  placeholder="Stock"
+                  value={formData.stock}
+                  onChange={handleChange}
+                  className="border rounded px-3 py-2 w-full"
+                  required
+                />
+              </div>
+
+              <textarea
+                name="description"
+                placeholder="Description"
+                value={formData.description}
+                onChange={handleChange}
+                className="border rounded px-3 py-2 w-full"
+                rows={3}
+              ></textarea>
+
+              <div>
+                <input
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleChange}
+                  className="w-full"
+                />
+                {formData.image && (
+                  <img
+                    src={URL.createObjectURL(formData.image)}
+                    alt="Preview"
+                    className="mt-2 h-20 max-w-full rounded object-contain"
+                  />
+                )}
+              </div>
+
+              <div className="flex flex-col sm:flex-row justify-end gap-2 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  className="px-4 py-2 border rounded hover:bg-gray-100 w-full sm:w-auto"
+                  disabled={isLoading}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-full sm:w-auto"
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Adding..." : "Add Product"}
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
-      </DialogContent>
-    </Dialog>
+        </div>
+      )}
+    </>
   );
 }

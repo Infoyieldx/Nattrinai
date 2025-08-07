@@ -1,318 +1,210 @@
-import React, { useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from "@/components/ui/table";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "@/components/ui/select";
-import {
-  Plus,
-  Upload,
-  Calendar,
-  Percent
-} from "lucide-react";
-
-const promoCodes = [
-  {
-    id: "PROMO001",
-    code: "WELCOME10",
-    discount: "10%",
-    type: "percentage",
-    status: "active",
-    uses: 45,
-    maxUses: 100,
-    expiryDate: "2024-03-15"
-  },
-  {
-    id: "PROMO002", 
-    code: "FREESHIP",
-    discount: "$5.00",
-    type: "fixed",
-    status: "active",
-    uses: 23,
-    maxUses: 50,
-    expiryDate: "2024-02-28"
-  },
-  {
-    id: "PROMO003",
-    code: "SUMMER25",
-    discount: "25%",
-    type: "percentage", 
-    status: "expired",
-    uses: 100,
-    maxUses: 100,
-    expiryDate: "2024-01-31"
-  }
-];
+import React, { useState, useEffect } from "react";
+import { Plus, Upload, Calendar, Percent } from "lucide-react";
+import axios from "axios";
 
 export default function PromoCodeManager() {
+  const [promoCodesState, setPromoCodesState] = useState([]);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     code: "",
-    discountType: "percentage",
     discountValue: "",
-    maxUses: "",
-    expiryDate: ""
+    expiryDate: "",
   });
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "active":
-        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
-      case "expired":
-        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200";
-      case "disabled":
-        return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300";
-      default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300";
+  useEffect(() => {
+    fetchPromoCodes();
+  }, []);
+
+  const fetchPromoCodes = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/api/promocode");
+      setPromoCodesState(res.data);
+    } catch (err) {
+      console.error("Failed to fetch promo codes:", err);
     }
+  };
+
+  const getStatusColor = (isActive) => {
+    return isActive
+      ? "bg-green-100 text-green-800"
+      : "bg-gray-100 text-gray-800";
   };
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setFormData(prev => ({ ...prev, [id]: value }));
+    setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSelectChange = (value) => {
-    setFormData(prev => ({ ...prev, discountType: value }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically call an API to create the promo code
-    console.log("Creating promo code:", formData);
-    setOpen(false);
+
+    try {
+      const payload = {
+        code: formData.code,
+        discountPercentage: parseFloat(formData.discountValue),
+        expiresAt: new Date(formData.expiryDate),
+      };
+
+      await axios.post("http://localhost:5000/api/promocode", payload);
+
+      await fetchPromoCodes(); // Refresh promo list
+      setFormData({ code: "", discountValue: "", expiryDate: "" });
+      setOpen(false);
+    } catch (error) {
+      console.error("Error creating promo code:", error);
+      alert("Failed to create promo code. See console for details.");
+    }
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-4">
       <div className="flex justify-between items-center">
         <div>
           <h3 className="text-2xl font-bold">Promo Codes</h3>
-          <p className="text-muted-foreground">Manage discount codes and promotions</p>
+          <p className="text-gray-500">Manage discount codes and promotions</p>
         </div>
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <Button>
-              <Plus className="h-4 w-4 mr-2" />
-              Create Promo Code
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>Create New Promo Code</DialogTitle>
-            </DialogHeader>
+        <button
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          onClick={() => setOpen(true)}
+        >
+          <Plus className="h-4 w-4" /> Create Promo Code
+        </button>
+      </div>
+
+      {open && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg w-full max-w-md p-6">
+            <h2 className="text-lg font-semibold mb-4">Create New Promo Code</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="code">Promo Code</Label>
-                <Input 
-                  id="code" 
+              <div className="space-y-1">
+                <label htmlFor="code" className="block font-medium">Promo Code</label>
+                <input
+                  id="code"
                   value={formData.code}
                   onChange={handleChange}
-                  placeholder="Enter promo code" 
-                  required 
+                  className="w-full border px-3 py-2 rounded"
+                  required
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="discountType">Discount Type</Label>
-                  <Select 
-                    value={formData.discountType}
-                    onValueChange={handleSelectChange}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="percentage">Percentage</SelectItem>
-                      <SelectItem value="fixed">Fixed Amount</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="discountValue">Discount Value</Label>
-                  <Input 
-                    id="discountValue" 
-                    type="number" 
-                    value={formData.discountValue}
-                    onChange={handleChange}
-                    placeholder="0" 
-                    required 
-                  />
-                </div>
+              <div className="space-y-1">
+                <label htmlFor="discountValue" className="block font-medium">
+                  Discount Percentage (%)
+                </label>
+                <input
+                  id="discountValue"
+                  type="number"
+                  value={formData.discountValue}
+                  onChange={handleChange}
+                  min="1"
+                  max="100"
+                  className="w-full border px-3 py-2 rounded"
+                  required
+                />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="maxUses">Max Uses</Label>
-                  <Input 
-                    id="maxUses" 
-                    type="number" 
-                    value={formData.maxUses}
-                    onChange={handleChange}
-                    placeholder="100" 
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="expiryDate">Expiry Date</Label>
-                  <Input 
-                    id="expiryDate" 
-                    type="date" 
-                    value={formData.expiryDate}
-                    onChange={handleChange}
-                  />
-                </div>
+              <div className="space-y-1">
+                <label htmlFor="expiryDate" className="block font-medium">Expiry Date</label>
+                <input
+                  id="expiryDate"
+                  type="date"
+                  value={formData.expiryDate}
+                  onChange={handleChange}
+                  className="w-full border px-3 py-2 rounded"
+                  required
+                />
               </div>
 
-              <div className="flex justify-end space-x-2 pt-4">
-                <Button 
-                  type="button" 
-                  variant="outline" 
+              <div className="flex justify-end gap-2">
+                <button
+                  type="button"
                   onClick={() => setOpen(false)}
+                  className="px-4 py-2 border rounded hover:bg-gray-100"
                 >
                   Cancel
-                </Button>
-                <Button type="submit">Create Promo Code</Button>
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                >
+                  Create Promo Code
+                </button>
               </div>
             </form>
-          </DialogContent>
-        </Dialog>
-      </div>
+          </div>
+        </div>
+      )}
 
       <div className="grid gap-6 md:grid-cols-3">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Active Codes
-            </CardTitle>
-            <Percent className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {promoCodes.filter(p => p.status === 'active').length}
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Currently available
-            </p>
-          </CardContent>
-        </Card>
+        <div className="p-4 border rounded shadow">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-medium">Active Codes</span>
+            <Percent className="h-4 w-4 text-gray-500" />
+          </div>
+          <div className="text-2xl font-bold">
+            {promoCodesState.filter((p) => p.isActive).length}
+          </div>
+          <p className="text-xs text-gray-500">Currently available</p>
+        </div>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Total Uses
-            </CardTitle>
-            <Upload className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {promoCodes.reduce((sum, promo) => sum + promo.uses, 0)}
-            </div>
-            <p className="text-xs text-muted-foreground">
-              All time
-            </p>
-          </CardContent>
-        </Card>
+        <div className="p-4 border rounded shadow">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-medium">Total Uses</span>
+            <Upload className="h-4 w-4 text-gray-500" />
+          </div>
+          <div className="text-2xl font-bold">N/A</div>
+          <p className="text-xs text-gray-500">Tracking not implemented</p>
+        </div>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Savings Given
-            </CardTitle>
-            <Calendar className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">$8,234</div>
-            <p className="text-xs text-muted-foreground">
-              Total discounts
-            </p>
-          </CardContent>
-        </Card>
+        <div className="p-4 border rounded shadow">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-medium">Savings Given</span>
+            <Calendar className="h-4 w-4 text-gray-500" />
+          </div>
+          <div className="text-2xl font-bold">$0</div>
+          <p className="text-xs text-gray-500">Placeholder</p>
+        </div>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Promo Code List</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Code</TableHead>
-                <TableHead>Discount</TableHead>
-                <TableHead>Usage</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Expiry Date</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {promoCodes.map((promo) => (
-                <TableRow key={promo.id}>
-                  <TableCell className="font-medium">{promo.code}</TableCell>
-                  <TableCell>{promo.discount}</TableCell>
-                  <TableCell>
-                    <div className="text-sm">
-                      {promo.uses} / {promo.maxUses}
-                      <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1">
-                        <div 
-                          className="bg-blue-600 h-1.5 rounded-full" 
-                          style={{ 
-                            width: `${Math.min(100, (promo.uses / promo.maxUses) * 100)}%` 
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge className={getStatusColor(promo.status)}>
-                      {promo.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>{promo.expiryDate}</TableCell>
-                  <TableCell className="text-right">
-                    <div className="flex justify-end gap-2">
-                      <Button variant="outline" size="sm">
-                        Edit
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        {promo.status === 'active' ? 'Disable' : 'Enable'}
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+      <div className="border rounded shadow overflow-x-auto">
+        <table className="min-w-full">
+          <thead>
+            <tr className="bg-gray-100 text-left text-sm">
+              <th className="px-4 py-2">Code</th>
+              <th className="px-4 py-2">Discount</th>
+              <th className="px-4 py-2">Status</th>
+              <th className="px-4 py-2">Expiry Date</th>
+              <th className="px-4 py-2 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {promoCodesState.map((promo) => (
+              <tr key={promo._id} className="border-t">
+                <td className="px-4 py-2 font-medium">{promo.code}</td>
+                <td className="px-4 py-2">{promo.discountPercentage}%</td>
+                <td className="px-4 py-2">
+                  <span className={`px-2 py-1 rounded text-xs font-medium ${getStatusColor(promo.isActive)}`}>
+                    {promo.isActive ? "active" : "disabled"}
+                  </span>
+                </td>
+                <td className="px-4 py-2">
+                  {new Date(promo.expiresAt).toLocaleDateString()}
+                </td>
+                <td className="px-4 py-2 text-right">
+                  <div className="flex justify-end gap-2">
+                    <button className="px-2 py-1 border rounded text-sm hover:bg-gray-100">
+                      Edit
+                    </button>
+                    <button className="px-2 py-1 border rounded text-sm hover:bg-gray-100">
+                      {promo.isActive ? "Disable" : "Enable"}
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

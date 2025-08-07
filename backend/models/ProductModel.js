@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema(
@@ -30,6 +31,13 @@ const productSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+ stock: {
+  type: Number,
+  required: true,
+  min: 50,
+  max: 300
+}
+
   },
   {
     timestamps: true,

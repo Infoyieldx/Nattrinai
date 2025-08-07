@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const Product = require("../models/ProductModel");
-const Category = require("../models/Category");
-const PromoCode = require("../models/PromoCodeModel");
+const Product = require("../Models/ProductModel")
+const Category = require("../models/Category")
+const PromoCode = require("../Models/PromoCodeModel");
 const imageUpload = require("../Helpers/Multer");
 // Create Product
 router.post("/", imageUpload(), async (req, res) => {
   try {
-    const { productId, productName, category, price, description } = req.body;
+    const { productId, productName, category, price, description ,stock} = req.body;
 
     const categoryExists = await Category.findById(category);
     if (!categoryExists) {
@@ -27,6 +27,7 @@ router.post("/", imageUpload(), async (req, res) => {
       price,
       description,
       imageUrl,
+      stock
     });
 
     const savedProduct = await product.save();
@@ -60,7 +61,7 @@ router.get("/:id", async (req, res) => {
 // Update Product by ID
 router.put("/:id", imageUpload(), async (req, res) => {
   try {
-    const { productId, productName, category, price, description } = req.body;
+    const { productId, productName, category, price, description ,stock} = req.body;
 
     if (category) {
       const categoryExists = await Category.findById(category);
@@ -68,7 +69,7 @@ router.put("/:id", imageUpload(), async (req, res) => {
         return res.status(400).json({ error: "Invalid category ID" });
     }
 
-    const updateData = { productId, productName, category, price, description };
+    const updateData = { productId, productName, category, price, description,stock };
 
     if (req.file) {
       updateData.imageUrl = `${req.protocol}://${req.get(
@@ -88,7 +89,7 @@ router.put("/:id", imageUpload(), async (req, res) => {
       return res.status(404).json({ error: "Product not found" });
     res.json(updatedProduct);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 

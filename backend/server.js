@@ -14,6 +14,7 @@ const app = express();
 app.use(cors());
 app.use(express.json()); // Parses incoming JSON
 app.use('/api/products/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/api/categories/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI || process.env.Data_Base, {
