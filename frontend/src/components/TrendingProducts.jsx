@@ -16,7 +16,7 @@ const groupProductsByCategory = (products) => {
   return grouped;
 };
 
-const TrendingProducts = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
+const TrendingProducts = ({ handleAddToCart, handleWishlistToggle, wishlistItems, setShowCart }) => {
   const groupedProducts = groupProductsByCategory(trendingProducts);
 
   return (
@@ -53,6 +53,7 @@ const TrendingProducts = ({ handleAddToCart, handleWishlistToggle, wishlistItems
                         onWishlistToggle={handleWishlistToggle}
                         isInWishlist={wishlistItems.some(item => item.id === product.id)}
                         showBuyNow={true}
+                        setShowCart={setShowCart}
                         showDiscountBadge={true}
                       />
                     </div>

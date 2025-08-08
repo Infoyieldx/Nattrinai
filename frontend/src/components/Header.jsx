@@ -115,8 +115,10 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
           <div className="hidden md:flex items-center space-x-8 text-lg mx-10">
             <Link to="/" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline">Home</Link>
             <Link to="/products" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline">Products</Link>
-            <Link to="/about" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline">About</Link>
+            <Link to="/all-categories" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline">All Categories</Link>
+            {/* <Link to="/about" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline">About</Link> */}
             <Link to="/contact" className="text-[#3D3F24] hover:text-[#4A5A2A] font-medium hover:underline">Contact</Link>
+            
           </div>
           </div>
           
@@ -205,11 +207,11 @@ const Header = ({ cartCount, wishlistCount, setShowCart }) => {
               Products 
             </Link>
             <Link
-              to="/about"
+              to="/all-categories"
               className="block px-3 py-2 text-[#3D3F24] hover:text-[#4A5A2A]"
               onClick={() => setMobileMenuOpen(false)}
             >
-              About
+              All Categories
             </Link>
             <Link
               to="/contact"

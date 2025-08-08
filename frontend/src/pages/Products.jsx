@@ -4,7 +4,7 @@ import ProductCard from '../components/ProductCard';
 import FilterSidebar from '../components/FilterSidebar';
 import { getAllProducts, getProductsByCategory, getProductCategory } from '../data/products';
 
-const Products = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
+const Products = ({ handleAddToCart, handleWishlistToggle, wishlistItems,setShowCart }) => {
   const location = useLocation(); // from react-router-dom
   const [sortBy, setSortBy] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -81,7 +81,7 @@ const Products = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
       
       <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
         {/* Filter Sidebar */}
-        <div className="w-full lg:w-64 lg:ml-0 mb-4 lg:mb-0">
+        <div className="w-full lg:w-64 lg:ml-0 mb-4 lg:mb-0 ">
           <FilterSidebar
             onFiltersChange={handleFiltersChange}
             selectedCategories={filters.categories}
@@ -110,6 +110,7 @@ const Products = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
                   onWishlistToggle={handleWishlistToggle}
                   isInWishlist={wishlistItems.some(item => item.id === product.id)}
                   showBuyNow={true}
+                  setShowCart={setShowCart}
                 />
               ))}
             </div>

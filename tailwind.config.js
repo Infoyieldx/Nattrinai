@@ -77,7 +77,7 @@ export default {
         },
         typing: {
           from: { width: "0ch" },
-          to: { width: "15ch" },
+          to: { width: "19ch" },
         },
         blink: {
           "50%": { borderColor: "transparent" },
@@ -87,7 +87,7 @@ export default {
         coinFlip: "coinFlip 1s ease-in-out",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        typing: "typing 3s steps(15, end) forwards", // 👈 match steps to characters
+        typing: "typing 3s steps(19, end) forwards", // 👈 match steps to characters
          blink: "blink 0.7s step-end infinite",
       },
       

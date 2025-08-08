@@ -4,7 +4,7 @@ import DryFruitsCombos from '../components/DryFruitsCombos';
 import TrendingProducts from '../components/TrendingProducts';
 import SpecialOffers from '../components/SpecialOffers';
 
-const Home = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
+const Home = ({ handleAddToCart, handleWishlistToggle, wishlistItems,setShowCart }) => {
   return (
     <>
       <Hero />
@@ -13,16 +13,20 @@ const Home = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
         handleAddToCart={handleAddToCart}
         handleWishlistToggle={handleWishlistToggle}
         wishlistItems={wishlistItems}
+        setShowCart={setShowCart}
       />
       <TrendingProducts
         handleAddToCart={handleAddToCart}
         handleWishlistToggle={handleWishlistToggle}
         wishlistItems={wishlistItems}
+        setShowCart={setShowCart}
+
       />
       <SpecialOffers
         handleAddToCart={handleAddToCart}
         handleWishlistToggle={handleWishlistToggle}
         wishlistItems={wishlistItems}
+        setShowCart={setShowCart}
       />
     </>
   );
