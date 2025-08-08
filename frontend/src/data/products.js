@@ -46,6 +46,8 @@ export const categories = [
   { id: 10, name: 'Health', image: Health },
   { id: 11, name: 'Grocery', image: Grocery },
   { id: 12, name: 'Beauty', image: beautyImg },
+  
+  
 ];
 
 export const subcategories = {

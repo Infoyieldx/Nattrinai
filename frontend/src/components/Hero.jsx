@@ -8,6 +8,8 @@ import {
 } from 'lucide-react';
 import store from '../assets/store.jpg';
 import delivery from '../assets/delivery.jpg';
+import hero_intro from '../assets/hero_intro.jpeg'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -20,8 +22,7 @@ function Hero() {
       subtitle: 'Organic Products',
       description:
         "Discover the finest organic products from farm to your table. Pure, natural, and sustainably sourced for your family's health.",
-      backgroundImage:
-        'https://images.pexels.com/photos/1458694/pexels-photo-1458694.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080',
+      backgroundImage: hero_intro,
       icon: <Leaf className="w-10 h-10 sm:w-12 sm:h-12" />,
       buttonText: 'Explore Products',
     },
@@ -65,10 +66,12 @@ function Hero() {
               index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
             }`}
           >
-            <img
+            <LazyLoadImage
               src={slide.backgroundImage}
               alt={slide.title}
+              effect="blur"
               className="absolute inset-0 w-full h-full object-cover brightness-[.25]"
+              wrapperClassName="absolute inset-0 w-full h-full"
             />
 
             {/* Floating Icons */}

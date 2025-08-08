@@ -20,10 +20,10 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link href="/" className="text-white-300 hover:text-white hover:underline hover:bg-[#4A5A2A] transition rounded px-2 py-1 cursor-pointer">Home</Link></li>
-              <li><Link href="/products" className="text-white-300 hover:text-white hover:underline hover:bg-[#4A5A2A] transition rounded px-2 py-1 cursor-pointer">Products</Link></li>
-              <li><Link href="/about" className="text-white-300 hover:text-white hover:underline hover:bg-[#4A5A2A] transition rounded px-2 py-1 cursor-pointer">About Us</Link></li>
-              <li><Link href="/contact" className="text-white-300 hover:text-white hover:underline hover:bg-[#4A5A2A] transition rounded px-2 py-1 cursor-pointer">Contact</Link></li>
+              <li><Link to="/" className="text-white-300 hover:text-white hover:underline hover:bg-[#4A5A2A] transition rounded px-2 py-1 cursor-pointer">Home</Link></li>
+              <li><Link to="/products" className="text-white-300 hover:text-white hover:underline hover:bg-[#4A5A2A] transition rounded px-2 py-1 cursor-pointer">Products</Link></li>
+              {/* <li><Link to="/about" className="text-white-300 hover:text-white hover:underline hover:bg-[#4A5A2A] transition rounded px-2 py-1 cursor-pointer">About Us</Link></li> */}
+              <li><Link to="/contact" className="text-white-300 hover:text-white hover:underline hover:bg-[#4A5A2A] transition rounded px-2 py-1 cursor-pointer">Contact</Link></li>
             </ul>
           </div>
           {/* Pages (add links as needed) */}
@@ -31,6 +31,9 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Pages</h3>
             <ul className="space-y-2">
               {/* Add page links here if needed */}
+              <li><Link to="#" className="text-white-300 hover:text-white hover:underline hover:bg-[#4A5A2A] transition rounded  py-1 cursor-pointer">Privacy Policy</Link></li>
+              <li><Link to="#" className="text-white-300 hover:text-white hover:underline hover:bg-[#4A5A2A] transition rounded  py-1 cursor-pointer">Return Policy</Link></li>
+              <li><Link to="#" className="text-white-300 hover:text-white hover:underline hover:bg-[#4A5A2A] transition rounded  py-1 cursor-pointer">Cookies</Link></li>
             </ul>
           </div>
           {/* Reach Us */}
@@ -52,15 +55,11 @@ const Footer = () => {
         </div>
         {/* Bottom bar */}
         <div className="mt-8 pt-8 border-t border-white-600">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4">
             <p className="text-white-400 text-sm text-center md:text-left">
               &copy; 2024 A-Z Organic Store. All rights reserved.
             </p>
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-sm items-center">
-              <a href="#" className="text-white-400 hover:text-white">Privacy Policy</a>
-              <a href="#" className="text-white-400 hover:text-white">Terms of Service</a>
-              <a href="#" className="text-white-400 hover:text-white">Cookies</a>
-            </div>
+            
           </div>
         </div>
       </div>

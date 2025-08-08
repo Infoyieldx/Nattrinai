@@ -8,7 +8,7 @@ import ProductCard from '../components/ProductCard';
 import ProductReviews from '../components/ProductReviews';
 import RelatedProducts from '../components/RelatedProducts';
 
-const ProductDetail = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
+const ProductDetail = ({ handleAddToCart, handleWishlistToggle, wishlistItems, setShowCart }) => {
   const { productId } = useParams();
   const navigate = useNavigate();
 
@@ -19,6 +19,7 @@ const ProductDetail = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [helpfulClicked, setHelpfulClicked] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [addedToCart, setAddedToCart] = useState(false); // ✅ New state
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -29,6 +30,7 @@ const ProductDetail = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
     setQuantity(1);
     setShowAllReviews(false);
     setHelpfulClicked([]);
+    setAddedToCart(false); 
 
     if (prod?.id) {
       const storedReviews = JSON.parse(localStorage.getItem(`reviews-${prod.id}`)) || [];
@@ -42,11 +44,21 @@ const ProductDetail = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
     for (let i = 0; i < quantity; i++) {
       handleAddToCart(product);
     }
+    setAddedToCart(true); // ✅ Set flag
+  
   };
-
+  
   const handleBuyNow = () => {
     handleAddToCartWithQuantity();
     navigate('/checkout');
+  };
+
+  const handleViewCart = () => {
+    if (typeof setShowCart === 'function') {
+      setShowCart(true);
+    } else {
+      alert('Viewing cart (no cart UI defined)');
+    }
   };
 
   const isInWishlist = wishlistItems.some(item => item.id === product?.id);
@@ -143,14 +155,25 @@ const ProductDetail = ({ handleAddToCart, handleWishlistToggle, wishlistItems })
             </div>
           </div>
 
+          {/* Add/View Cart and Buy Now */}
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
-              <button
-                onClick={handleAddToCartWithQuantity}
-                className="flex-1 bg-[#4A5A2A] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[#3D3F24] transition-colors"
-              >
-                Add to Cart
-              </button>
+              {addedToCart ? (
+                <button
+                  onClick={handleViewCart}
+                  className="flex-1 bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-500 transition-colors animate-pulse"
+                >
+                  View Cart
+                </button>
+              ) : (
+                <button
+                  onClick={handleAddToCartWithQuantity}
+                  className="flex-1 bg-[#4A5A2A] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[#3D3F24] transition-colors"
+                >
+                  Add to Cart
+                </button>
+              )}
+
               <button
                 onClick={handleBuyNow}
                 className="flex-1 bg-orange-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-orange-600 transition-colors"

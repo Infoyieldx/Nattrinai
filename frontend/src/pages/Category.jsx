@@ -4,7 +4,7 @@ import ProductCard from '../components/ProductCard';
 import FilterSidebar from '../components/FilterSidebar';
 import { subcategories, getAllProducts } from '../data/products';
 
-const Category = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
+const Category = ({ handleAddToCart, handleWishlistToggle, wishlistItems, setShowCart }) => {
   const { categoryName } = useParams();
   const location = useLocation();
 
@@ -103,7 +103,9 @@ const Category = ({ handleAddToCart, handleWishlistToggle, wishlistItems }) => {
                   onAddToCart={handleAddToCart}
                   onWishlistToggle={handleWishlistToggle}
                   isInWishlist={wishlistItems.some(item => item.id === product.id)}
-                  showBuyNow={false}
+                  setShowCart={setShowCart}
+                  showBuyNow={true}
+                  
                 />
               ))}
             </div>

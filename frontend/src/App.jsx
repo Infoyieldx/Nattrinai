@@ -4,6 +4,8 @@ import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useEffect, useState } from "react";
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -25,6 +27,9 @@ import ScrollToTop from "./components/ScrollTop.jsx";
 import Payment from './components/Payment';
 import Success from './components/success.jsx';
 import Failure from './components/failure';
+import AllCategories from "./components/AllCategories.jsx";
+import Error404 from './pages/Error404'; 
+
 // import { BrowserRouter as Router ,Routes ,Route } from "react-router-dom";
 
 function MainRouter() {
@@ -196,7 +201,9 @@ function MainRouter() {
         <Route path="/success" element={<Success clearCart={clearCart} />} />
         <Route path="/failure" element={<Failure />} />
         <Route path="/admin" element={<AdminDashboard />} />
-
+        <Route path="/all-categories" element={<AllCategories />} />
+        <Route path="*" element={<Error404 />} />
+        
       </Routes>
      
   
